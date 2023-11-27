@@ -8,7 +8,7 @@ public class CementPlant extends Building
 {
     private final String name = "Cement Plant";
     public CementPlant() {
-        super("Cement Plant", 10, 0, 2, 1, 4);
+        super("Cement Plant", 10, 0, 4, 1, 4);
         this.setResourcesConsumption(new HashMap<>()
          {{
              put(Resource.COAL, 4);
