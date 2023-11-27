@@ -9,7 +9,7 @@ public class WoodenCabin extends Building{
     private final String name = "Wooden Cabin";
     public WoodenCabin() {
         super("Wooden Cabin", 2, 2, 2, 1, 1);
-        this.setResourcesConsumption(null); // TODO : Remplacer par des 0.
+        this.setResourcesConsumption(null);
         this.setResourcesNeeded(new HashMap<>(){{
             put(Resource.WOOD, 1);
         }});
