@@ -1,6 +1,9 @@
 package Game.Buildings;
+
+import Game.People.Citizen;
 import Game.Resource;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Building {
@@ -13,6 +16,27 @@ public abstract class Building {
     private HashMap<Resource, Integer> resourcesNeeded;
     private HashMap<Resource, Integer> resourcesConsumption;
     private HashMap<Resource, Integer> resourcesGenerating;
+
+    private int citizensCount;
+    private int workersCount;
+    private ArrayList<Citizen> citizens;
+    private ArrayList<Citizen> workers;
+
+    public Building(String name, int workersCapacity, int citizensCapacity, int buildingTime, int level, int goldCost) {
+        this.name = name;
+        this.workersCapacity = workersCapacity;
+        this.citizensCapacity = citizensCapacity;
+        this.buildingTime = buildingTime;
+        this.level = level;
+        this.goldCost = goldCost;
+        this.resourcesConsumption = new HashMap<>();
+        this.resourcesNeeded = new HashMap<>();
+        this.resourcesGenerating = new HashMap<>();
+        this.citizens = new ArrayList<>();
+        this.workers = new ArrayList<>();
+        this.citizensCount = 0;
+        this.workersCount = 0;
+    }
 
     public String getName() {
         return name;
@@ -82,15 +106,63 @@ public abstract class Building {
         this.resourcesGenerating = resourcesGenerating;
     }
 
-    public Building(String name, int workersCapacity, int citizensCapacity, int buildingTime, int level, int goldCost) {
-        this.name = name;
-        this.workersCapacity = workersCapacity;
-        this.citizensCapacity = citizensCapacity;
-        this.buildingTime = buildingTime;
-        this.level = level;
-        this.goldCost = goldCost;
-        this.resourcesConsumption = new HashMap<>();
-        this.resourcesNeeded = new HashMap<>();
-        this.resourcesGenerating= new HashMap<>();
+    public void addCitizen(Citizen citizen) {
+        if (this.citizensCount < this.citizensCapacity) {
+            this.citizens.add(citizen);
+            this.citizensCount++;
+            BuildingLogger("Citizen added");
+        } else {
+            BuildingLoggerError("Citizen capacity reached");
+        }
+    }
+
+    public void addWorker(Citizen citizen) {
+        if (this.workersCount < this.workersCapacity) {
+            this.workers.add(citizen);
+            this.workersCount++;
+            BuildingLogger("Worker added");
+        } else {
+            BuildingLoggerError("Worker capacity reached");
+        }
+    }
+
+    public void removeCitizen(Citizen citizen) {
+        if (this.citizensCount > 0) {
+            for (int i = 0; i < this.citizensCount; i++) {
+                if (this.citizens.get(i).getId() == citizen.getId()) {
+                    this.citizens.remove(i);
+                    this.citizensCount--;
+                    BuildingLogger("Citizen removed");
+                    break;
+                }
+                BuildingLoggerError("Citizen not found");
+            }
+        } else {
+            BuildingLoggerError("No citizen to remove");
+        }
+    }
+
+    public void removeWorker(Citizen citizen) {
+        if (this.workersCount > 0) {
+            for (int i = 0; i < this.workersCount; i++) {
+                if (this.workers.get(i).getId() == citizen.getId()) {
+                    this.workers.remove(i);
+                    this.workersCount--;
+                    BuildingLogger("Worker removed");
+                    break;
+                }
+                BuildingLoggerError("Worker not found");
+            }
+        } else {
+            BuildingLoggerError("No worker to remove");
+        }
+    }
+
+    public void BuildingLogger(String arg) {
+        System.out.println("[" + this.name + "]" + arg);
+    }
+
+    public void BuildingLoggerError(String arg) {
+        System.err.println("[" + this.name + "]" + arg);
     }
 }
