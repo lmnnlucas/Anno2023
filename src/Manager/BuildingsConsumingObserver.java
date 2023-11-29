@@ -10,19 +10,21 @@ public class BuildingsConsumingObserver implements Observer {
 
     private Manager manager;
     private ArrayList<Building> buildings;
-    private HashMap<Resource, Integer> resources;
-
     public BuildingsConsumingObserver(Manager manager) {
         this.manager = manager;
     }
 
     @Override
     public void update() {
-        // HashMap<Resource, Integer> actualResources = manager.getResources();
         for (Building building : buildings) {
             for (Resource resource : building.getResourcesConsumption().keySet()) {
-                if (resources.get(resource) < building.getResourcesConsumption().get(resource)) {
-                    System.out.println("Not enough " + resource + " to run " + building.getName());
+                if (manager.getNumberRessource(resource) < building.getResourcesConsumption().get(resource)) {
+                    System.out.println("Not enough " + resource + " to run " + building.getName() + ". It will not produce anything.");
+                    manager.setResource(resource, -manager.getNumberRessource(resource));
+                }
+                else {
+                    manager.setResource(resource, -building.getResourcesConsumption().get(resource));
+                    manager.setResource(resource, building.getResourcesGenerating().get(resource));
                 }
             }
         }
