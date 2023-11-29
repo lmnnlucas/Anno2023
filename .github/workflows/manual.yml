@@ -1,0 +1,35 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow builds the java classes
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3.13.0
+
+      - name: Get classes list
+        run: |
+          find src/ -type f -name "*.java" > sources 
+
+      - name: Compile
+        run: |
+          mkdir ./out/
+          javac ./out/ @sources 
+            
+    
+  
