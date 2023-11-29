@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CitizenConsumingObserver implements Observer {
-
-    ArrayList<Citizen> citizens = new ArrayList<>();
-    HashMap<Resource, Integer> ressources = new HashMap<>();
     private Manager manager;
 
     CitizenConsumingObserver(Manager manager) {
@@ -17,15 +14,14 @@ public class CitizenConsumingObserver implements Observer {
     }
 
     @Override
-    public void update() {
-        // int food = manager.getRessource(Resource.FOOD);
-        citizens.forEach(citizen -> {
+    public void update() {;
+        manager.getCitizens().forEach(citizen -> {
             System.out.println("Citizen " + citizen.getId() + " is consuming food");
-            if (ressources.get(Resource.FOOD) == 0) {
+            if (manager.getNumberRessource(Resource.FOOD) == 0) {
                 System.out.println("Citizen " + citizen.getId() + " is starving");
-                // manager.citizenDeath(citizen);
+                manager.citizenDeath(citizen);
             } else {
-                // manager.setRessource(Resource.FOOD, value-1);
+                manager.setResource(Resource.FOOD, -1);
             }
         });
 
