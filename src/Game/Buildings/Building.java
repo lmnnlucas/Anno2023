@@ -110,6 +110,7 @@ public abstract class Building {
         if (this.citizensCount < this.citizensCapacity) {
             this.citizens.add(citizen);
             this.citizensCount++;
+            citizen.setHome(this);
             BuildingLogger("Citizen added");
         } else {
             BuildingLoggerError("Citizen capacity reached");
@@ -121,6 +122,7 @@ public abstract class Building {
             this.workers.add(citizen);
             this.workersCount++;
             BuildingLogger("Worker added");
+            citizen.setWorkplace(this);
         } else {
             BuildingLoggerError("Worker capacity reached");
         }
@@ -132,6 +134,7 @@ public abstract class Building {
                 if (this.citizens.get(i).getId() == citizen.getId()) {
                     this.citizens.remove(i);
                     this.citizensCount--;
+                    this.citizens.get(i).setHome(null);
                     BuildingLogger("Citizen removed");
                     break;
                 }
@@ -148,6 +151,7 @@ public abstract class Building {
                 if (this.workers.get(i).getId() == citizen.getId()) {
                     this.workers.remove(i);
                     this.workersCount--;
+                    this.citizens.get(i).setWorkplace(null);
                     BuildingLogger("Worker removed");
                     break;
                 }
