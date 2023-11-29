@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
 import Game.Position;
 import Game.Resource;
 import Game.Buildings.Building;
@@ -13,7 +14,6 @@ import Game.People.Citizen;
 public class Manager {
     private final int width;
     private final int height;
-    private int round = 0;
     private HashMap<Resource,Integer> resources = new HashMap<>(){{ //Config initial
         put(Resource.GOLD, 10);
         put(Resource.FOOD, 100);
@@ -36,9 +36,9 @@ public class Manager {
         building.put(new Position(0,0),new House());
         citizens.add(new Citizen(building.get((new Position(0,0)))));
     }
+  
     public Manager(){
         this.width = 10;
-        this.height = 10;
         building.put(new Position(0,0),new House());
         citizens.add(new Citizen(building.get((new Position(0,0)))));
     }
@@ -68,7 +68,7 @@ public class Manager {
     }
     public List<Citizen> getCitizens(){
         return citizens;
-    }
+
     public HashMap<Position,Building> getBuilding(){
         return building;
     }
