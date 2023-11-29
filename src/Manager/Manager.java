@@ -14,6 +14,7 @@ import Game.People.Citizen;
 public class Manager {
     private final int width;
     private final int height;
+    private int round = 0;
     private HashMap<Resource,Integer> resources = new HashMap<>(){{ //Config initial
         put(Resource.GOLD, 10);
         put(Resource.FOOD, 100);
@@ -68,7 +69,7 @@ public class Manager {
     }
     public List<Citizen> getCitizens(){
         return citizens;
-
+    }
     public HashMap<Position,Building> getBuilding(){
         return building;
     }
