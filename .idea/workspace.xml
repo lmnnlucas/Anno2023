@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e31183c-20d0-482a-9e79-1dee1f44f521" name="Changes" comment="ANO-9 : SteelMill Fait+Correction CementPlant">
-      <change afterPath="$PROJECT_DIR$/src/Game/UI/UI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Game/UI/WorldEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/UI/WorldEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/WorldEntity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +66,7 @@
       <workItem from="1700495644695" duration="2740000" />
       <workItem from="1701099657777" duration="5258000" />
       <workItem from="1701107582502" duration="799000" />
-      <workItem from="1701263210419" duration="4429000" />
+      <workItem from="1701263210419" duration="5267000" />
     </task>
     <task id="LOCAL-00001" summary="ANO-4&#10;ApartementBuilding fait">
       <option name="closed" value="true" />
