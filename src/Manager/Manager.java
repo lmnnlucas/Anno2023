@@ -40,6 +40,7 @@ public class Manager {
   
     public Manager(){
         this.width = 10;
+        this.height = 10;
         building.put(new Position(0,0),new House());
         citizens.add(new Citizen(building.get((new Position(0,0)))));
     }
