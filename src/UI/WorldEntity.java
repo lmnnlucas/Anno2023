@@ -1,4 +1,4 @@
-package Game.UI;
+package UI;
 
 public enum WorldEntity
 {
