@@ -1,6 +1,7 @@
 package UI;
 
 import Game.Buildings.*;
+import Game.Position;
 import Manager.*;
 
 import java.io.BufferedReader;
@@ -11,17 +12,25 @@ import java.util.Scanner;
 public class UI
 {
     private Manager manager;
-    private int width = manager.getWidth();
-    private int height = manager.getHeight();
+    private int width = 10; //manager.getWidth();
+    private int height = 10; //manager.getHeight();
     private WorldEntity[][] world;
 
-    public UI() {}
+    public UI(Manager manager)
+    {
+        this.manager = manager;
+        world = new WorldEntity[width][height];
+    }
 
 
     //public void UI(){}
 
-    private static WorldEntity transfromDecorToWorldEntity(Building building)
+    private static WorldEntity transfromBuildingToWorldEntity(Building building)
     {
+        if(building == null)
+        {
+            return WorldEntity.NOTHING;
+        }
         switch(building.getName())
         {
             case "Wooden Cabin":
@@ -42,12 +51,11 @@ public class UI
                 return WorldEntity.STEELMILL;
             case "Tool Factory":
                 return WorldEntity.TOOLFACTORY;
-            default:
-                return WorldEntity.NOTHING;
         }
+        return null;
     }
 
-    private static Building transfromWorldEntityToDecor(WorldEntity worldEntity)
+    private static Building transfromWorldEntityToBuilding(WorldEntity worldEntity)
     {
         switch(worldEntity)
         {
@@ -80,7 +88,8 @@ public class UI
         {
             for(int y = 0; y < height; y++)
             {
-                world[x][y] = WorldEntity.NOTHING; // A mettre Manager.getWorld().getEntityAt(x, y);
+                Position position = new Position(x, y);
+                world[x][y] = transfromBuildingToWorldEntity(manager.getBuilding().get(position)); // A mettre Manager.getWorld().getEntityAt(x, y);
             }
         }
     }
@@ -89,16 +98,12 @@ public class UI
     public void printWorld()
     {
         buildWorld();
-        for(int x = 0; x < width; x++)
+        for(int y = 0; y < height; y++)
         {
-            for(int y = 0; y < height; y++)
+            for(int x = 0; x < width; x++)
             {
-                if(x != 0)
-                {
-                    System.out.print("_");
-                }
-                System.out.print(world[x][y]);
-                if(x != width)
+                System.out.print(world[x][y].getCode());
+                if(x != width - 1)
                 {
                     System.out.print("_");
                 }
@@ -114,12 +119,17 @@ public class UI
     {
         while(true)
         {
-            //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             Scanner sc = new Scanner(System.in);
             String value = sc.nextLine();
             if(value.equals("h"))
             {
-                System.out.println("W : Wooden Cabin");
+                System.out.println(" -- WELCOME TO THE HELP -- ");
+                System.out.println("For all manipulation you need to enter the position of the building");
+                System.out.println("Exemple : W 1 2 -> Add a wooden cabin at the position 1 2");
+                System.out.println("+ : Add a workers to a building (We will ask for the position of the building)");
+                System.out.println("- : Remove a workers to a building (We will ask for the position of the building)");
+                System.out.println("I : To get information about a building (We will ask for the position of the building)");
+                System.out.println("W : Wooden Cabin ");
                 System.out.println("H : House");
                 System.out.println("A : Apartment Building");
                 System.out.println("F : Farm");
@@ -128,10 +138,27 @@ public class UI
                 System.out.println("C : Cement Plant");
                 System.out.println("S : Steel Mill");
                 System.out.println("T : Tool Factory");
+                System.out.println("E : Exit");
+                System.out.println("h : Help");
+            }
+            if (value.equals("E"))
+            {
+                System.out.println(" -- GOODBYE -- ");
+                break;
             }
             else
             {
-
+                if(value.length() > 3)
+                {
+                    char c = value.charAt(0);
+                    int x = Integer.parseInt(value.substring(1,2));
+                    int y = Integer.parseInt(value.substring(2,3));
+                    Position position = new Position(x, y);
+                }
+                else
+                {
+                    System.out.println("Wrong entry");
+                }
             }
         }
     }

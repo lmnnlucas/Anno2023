@@ -18,4 +18,8 @@ public enum WorldEntity
         this.code = code;
     }
 
+    public char getCode()
+    {
+        return code;
+    }
 }
