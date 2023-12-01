@@ -10,12 +10,14 @@ import Game.Resource;
 import Game.Buildings.Building;
 import Game.Buildings.House;
 import Game.People.Citizen;
+import Game.UI.UI;
 
-public class Manager implements Observer{
+public class Manager{
     private final int width;
     private final int height;
     private int round = 0;
-    private ArrayList<Observer> observers = {new BuildingsConsumingObserver(this),new BuildingsGeneratingObserver(this)};
+    private UI ui = new UI();
+    private ArrayList<Observer> observers = new ArrayList<>();
     private HashMap<Resource,Integer> resources = new HashMap<>(){{ //Config initial
         put(Resource.GOLD, 10);
         put(Resource.FOOD, 100);
@@ -36,6 +38,7 @@ public class Manager implements Observer{
         this.height = height;
         building.put(new Position(0,0),new House());
         citizens.add(new Citizen(building.get((new Position(0,0)))));
+        initializeObserver();
     }
   
     public Manager(){
@@ -43,6 +46,11 @@ public class Manager implements Observer{
         this.height = 10;
         building.put(new Position(0,0),new House());
         citizens.add(new Citizen(building.get((new Position(0,0)))));
+        initializeObserver();
+    }
+    public void initializeObserver(){
+        observers.add(new BuildingsConsumingObserver(this));
+        observers.add(new CitizenConsumingObserver(this));
     }
 
     public int getWidth(){
@@ -80,10 +88,17 @@ public class Manager implements Observer{
     public void addRound(){
         round++;
     }
+    public void addObserver(Observer o){ // I guess ca va etre utile 
+        observers.add(o);
+    }
+    public void removeObserver(Observer o){// I guess la meme
+        observers.remove(o);
+    }
     public void update(){
         for(Observer o : observers){
             o.update();
         }
+        //ui.notify(); // Fonction notify à mettre dans la classe UI
         
     }
 }
