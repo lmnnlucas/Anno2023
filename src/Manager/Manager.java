@@ -11,10 +11,11 @@ import Game.Buildings.Building;
 import Game.Buildings.House;
 import Game.People.Citizen;
 
-public class Manager {
+public class Manager implements Observer{
     private final int width;
     private final int height;
     private int round = 0;
+    private ArrayList<Observer> observers = {new BuildingsConsumingObserver(this),new BuildingsGeneratingObserver(this)};
     private HashMap<Resource,Integer> resources = new HashMap<>(){{ //Config initial
         put(Resource.GOLD, 10);
         put(Resource.FOOD, 100);
@@ -28,7 +29,6 @@ public class Manager {
         put(Resource.TOOLS, 0);
     }};
     private HashMap<Position,Building> building = new HashMap<>();
-    
     private ArrayList<Citizen> citizens = new ArrayList<>(); 
 
     public Manager(int width,int height){
@@ -79,5 +79,11 @@ public class Manager {
     }
     public void addRound(){
         round++;
+    }
+    public void update(){
+        for(Observer o : observers){
+            o.update();
+        }
+        
     }
 }
