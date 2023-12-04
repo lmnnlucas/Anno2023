@@ -162,6 +162,15 @@ public abstract class Building {
         }
     }
 
+    public int getNumberofCitizens()
+    {
+        return this.citizensCount;
+    }
+
+    public int getNumberofWorkers()
+    {
+        return this.workersCount;
+    }
     public void BuildingLogger(String arg) {
         System.out.println("[" + this.name + "]" + arg);
     }

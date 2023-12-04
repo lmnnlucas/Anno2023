@@ -218,12 +218,10 @@ public class UI
                 {
                     Building building = manager.getBuildings().get(position);
                     System.out.println("Building : " + building.getName());
-                    /*System.out.println("Workers : " + building.getWorkers());
-                    System.out.println("Production : " + building.getProduction());
-                    System.out.println("Consumption : " + building.getConsumption());
-                    System.out.println("Storage : " + building.getStorage());
-                    System.out.println("Storage Capacity : " + building.getStorageCapacity());
-                    System.out.println("Workers Capacity : " + building.getWorkersCapacity());*/
+                    System.out.println("Citizens : " + building.getNumberofCitizens());
+                    System.out.println("Workers : " + building.getNumberofWorkers());
+                    System.out.println("Production : " + building.getResourcesGenerating());
+                    System.out.println("Consumption : " + building.getResourcesConsumption());
                     break;
                 }
                 else if(c == 'R')
