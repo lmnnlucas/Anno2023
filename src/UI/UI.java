@@ -116,7 +116,7 @@ public class UI
             for(int y = 0; y < height; y++)
             {
                 Position position = new Position(x, y);
-                world[x][y] = transfromBuildingToWorldEntity(manager.getBuilding().get(position));
+                world[x][y] = transfromBuildingToWorldEntity(manager.getBuildings().get(position));
             }
         }
     }
@@ -199,7 +199,7 @@ public class UI
                 }
                 else if(c == 'I')
                 {
-                    Building building = manager.getBuilding().get(position);
+                    Building building = manager.getBuildings().get(position);
                     System.out.println("Building : " + building.getName());
                     /*System.out.println("Workers : " + building.getWorkers());
                     System.out.println("Production : " + building.getProduction());

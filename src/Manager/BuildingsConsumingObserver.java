@@ -16,7 +16,7 @@ public class BuildingsConsumingObserver implements Observer {
 
     @Override
     public void update() {
-        for (Building building : buildings) {
+        for (Building building : manager.getBuildings().values()) {
             for (Resource resource : building.getResourcesConsumption().keySet()) {
                 if (manager.getNumberRessource(resource) < building.getResourcesConsumption().get(resource)) {
                     System.out.println("Not enough " + resource + " to run " + building.getName() + ". It will not produce anything.");
