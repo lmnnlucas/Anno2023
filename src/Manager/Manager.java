@@ -86,6 +86,11 @@ public class Manager{
     }
     public void setBuilding(Position pos,Building b){
         building.put(pos,b);
+        addRound();
+    }
+    public void removeBuilding(Position pos){
+        building.remove(pos);
+        addRound();
     }
     public void addRound(){
         round++;
@@ -108,8 +113,100 @@ public class Manager{
     public void waitEntry(){
         ui.waitEntry();
     }
+
     public void printResource(){
         ui.printResource();
+    }
+
+    public void AddWorkerFromBuilding(Building b,int number){
+        int cpt = 0;
+        for (int i = 0; i< citizens.size();i++){
+            if (citizens.get(i).getWorkplace() == null){
+                citizens.get(i).setWorkplace(b);
+                b.addWorker(citizens.get(i));
+                cpt ++;
+                if (cpt == number){
+                break;
+                }
+            }
+        }
+        if (cpt < number){
+            System.out.println("ratio");
+        }
+        addRound();
+    }
+
+    public void removeWorkerFromBuilding(Building b,int number){
+        int cpt = 0;
+        for (int i = 0; i< citizens.size();i++){
+            if (citizens.get(i).getWorkplace() == b){
+                citizens.get(i).setWorkplace(null);
+                b.removeWorker(citizens.get(i));
+                cpt ++;
+                if (cpt == number){
+                    break;
+                }
+            }
+        }
+        if (cpt < number){
+            System.out.println("ratio");
+        }
+        addRound();
+    }
+
+    public void addCitizenFromBuilding(Building b,int number){
+        int cpt = 0;
+        for (int i = 0; i< citizens.size();i++){
+            if (citizens.get(i).getHome() == null){
+                citizens.get(i).setHome(b);
+                b.addCitizen(citizens.get(i));
+                cpt++;
+                if (cpt == number){
+                    break;
+                }
+            }
+        }
+        if (cpt < number){
+            System.out.println("ratio");
+        }
+        addRound();
+    }
+
+    public void removeCitizenFromBuilding(Building b,int number){
+        int cpt = 0;
+        for (int i = 0; i< citizens.size();i++){
+            if (citizens.get(i).getHome() == b){
+                citizens.get(i).setHome(null);
+                b.removeCitizen(citizens.get(i));
+                cpt++;
+                if (cpt == number){
+                    break;
+                }
+            }
+        }
+        if (cpt < number){
+            System.out.println("ratio");
+        }
+        addRound();
+    }
+
+    public int getNumberHomeless(){
+        int cpt = 0;
+        for (int i = 0; i < citizens.size();i++){
+            if (citizens.get(i).getHome() == null){
+                cpt ++;
+            }
+        }
+        return cpt;
+    }
+    public int getNumberWorkless(){
+        int cpt = 0;
+        for (int i =0; i < citizens.size();i++){
+            if (citizens.get(i).getWorkplace() == null){
+                cpt ++;
+            }
+        }
+        return cpt;
     }
 
     public boolean isFinished(){
