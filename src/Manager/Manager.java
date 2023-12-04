@@ -111,4 +111,14 @@ public class Manager{
     public void printResource(){
         ui.printResource();
     }
+
+    public boolean isFinished(){
+        if (citizens.size() == 0){
+            return true;
+        }
+        if (round == 100){
+            return true;
+        }
+        return false;
+    }
 }

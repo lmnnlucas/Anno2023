@@ -6,7 +6,7 @@ public class GameLoop {
         this.manager = manager;
     }
     public void loop(){
-        while (true){
+        while (!manager.isFinished()){
             manager.printWorld();
             manager.printResource();
             manager.waitEntry();
