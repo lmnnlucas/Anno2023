@@ -184,7 +184,7 @@ public class UI
                 if(c == 'W' || c == 'H' || c == 'A' || c == 'F' || c == 'Q' || c == 'L' || c == 'C' || c == 'S' || c == 'T')
                 {
                     Building building = transfromWorldEntityToBuilding(transformCharToEntity(c));
-                    //manager.setBuilding(building, position);
+                    manager.setBuilding(position , building);
                     System.out.println("Building added");
                 }
                 else if(c == '+')
