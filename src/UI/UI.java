@@ -89,7 +89,7 @@ public class UI
             for(int y = 0; y < height; y++)
             {
                 Position position = new Position(x, y);
-                world[x][y] = transfromBuildingToWorldEntity(manager.getBuilding().get(position)); // A mettre Manager.getWorld().getEntityAt(x, y);
+                world[x][y] = transfromBuildingToWorldEntity(manager.getBuildings().get(position)); // A mettre Manager.getWorld().getEntityAt(x, y);
             }
         }
     }

@@ -79,7 +79,7 @@ public class Manager{
     public List<Citizen> getCitizens(){
         return citizens;
     }
-    public HashMap<Position,Building> getBuilding(){
+    public HashMap<Position,Building> getBuildings(){
         return building;
     }
     public void setBuild(Position pos,Building b){
