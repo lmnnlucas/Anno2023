@@ -86,6 +86,7 @@ public class Manager{
     }
     public void setBuilding(Position pos,Building b){
         building.put(pos,b);
+        addRound();
     }
     public void addRound(){
         round++;
@@ -111,7 +112,15 @@ public class Manager{
     public void printResource(){
         ui.printResource();
     }
-
+    public int AddWorkerFromBuilding(Building b){
+        int nb = b.getNbWorker();
+        if (nb > 0){
+            citizens.add(new Citizen(b));
+            b.setNbWorker(nb-1);
+            return 1;
+        }
+        return 0;
+    }
     public boolean isFinished(){
         if (citizens.size() == 0){
             return true;
