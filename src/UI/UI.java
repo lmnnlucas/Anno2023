@@ -2,6 +2,7 @@ package UI;
 
 import Game.Buildings.*;
 import Game.Position;
+import Game.Resource;
 import Manager.*;
 
 import java.io.BufferedReader;
@@ -139,13 +140,25 @@ public class UI
         }
     }
 
-
-
+    public void printResource()
+    {
+        System.out.println("Round : " + manager.getRound());
+        System.out.println(" -- RESOURCES -- ");
+        System.out.print("Wood : " + manager.getNumberRessource(Resource.WOOD));
+        System.out.print(" Stone : " + manager.getNumberRessource(Resource.STONE));
+        System.out.print(" Coal : " + manager.getNumberRessource(Resource.COAL));
+        System.out.print(" Iron : " + manager.getNumberRessource(Resource.IRON));
+        System.out.print(" Steel : " + manager.getNumberRessource(Resource.STEEL));
+        System.out.print(" Cement : " + manager.getNumberRessource(Resource.CEMENT));
+        System.out.print(" Lumber : " + manager.getNumberRessource(Resource.LUMBER));
+        System.out.print(" Tools : " + manager.getNumberRessource(Resource.TOOLS));
+    }
 
     public void waitEntry()
     {
         while(true)
         {
+            System.out.println();
             System.out.println("You can type h to get help");
             Scanner sc = new Scanner(System.in);
             String value = sc.nextLine();
@@ -166,6 +179,7 @@ public class UI
                 System.out.println("C : Cement Plant");
                 System.out.println("S : Steel Mill");
                 System.out.println("T : Tool Factory");
+                System.out.println("R : Remove a building (We will ask for the position of the building)");
                 System.out.println("E : Exit");
                 System.out.println("h : Help");
                 continue;
@@ -186,16 +200,19 @@ public class UI
                     Building building = transfromWorldEntityToBuilding(transformCharToEntity(c));
                     manager.setBuilding(position , building);
                     System.out.println("Building added");
+                    break;
                 }
                 else if(c == '+')
                 {
                     //manager.addWorker(position);
                     System.out.println("Worker added");
+                    break;
                 }
                 else if(c == '-')
                 {
                     //manager.removeWorker(position);
                     System.out.println("Worker removed");
+                    break;
                 }
                 else if(c == 'I')
                 {
@@ -207,13 +224,21 @@ public class UI
                     System.out.println("Storage : " + building.getStorage());
                     System.out.println("Storage Capacity : " + building.getStorageCapacity());
                     System.out.println("Workers Capacity : " + building.getWorkersCapacity());*/
+                    break;
+                }
+                else if(c == 'R')
+                {
+                    manager.getBuildings().remove(position);
+                    System.out.println("Building removed");
+                    break;
                 }
                 else
                 {
                     System.out.println("Wrong entry");
+                    continue;
                 }
-            }
             }
         }
     }
+}
 
