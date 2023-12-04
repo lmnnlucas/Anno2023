@@ -10,13 +10,13 @@ import Game.Resource;
 import Game.Buildings.Building;
 import Game.Buildings.House;
 import Game.People.Citizen;
-import Game.UI.UI;
+import UI.UI;
 
 public class Manager{
     private final int width;
     private final int height;
     private int round = 0;
-    private UI ui = new UI();
+    private UI ui = new UI(this);
     private ArrayList<Observer> observers = new ArrayList<>();
     private HashMap<Resource,Integer> resources = new HashMap<>(){{ //Config initial
         put(Resource.GOLD, 10);
@@ -32,7 +32,6 @@ public class Manager{
     }};
     private HashMap<Position,Building> building = new HashMap<>();
     private ArrayList<Citizen> citizens = new ArrayList<>();
-    private ArrayList<Citizen> citizens = new ArrayList<>(); 
 
     public Manager(int width,int height){
         this.width = width;
