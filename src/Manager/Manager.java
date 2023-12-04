@@ -39,6 +39,7 @@ public class Manager{
         building.put(new Position(0,0),new House());
         citizens.add(new Citizen(building.get((new Position(0,0)))));
         initializeObserver();
+
     }
 
     public Manager(){
@@ -47,6 +48,7 @@ public class Manager{
         building.put(new Position(0,0),new House());
         citizens.add(new Citizen(building.get((new Position(0,0)))));
         initializeObserver();
+
     }
     public void initializeObserver(){
         observers.add(new BuildingsConsumingObserver(this));
@@ -94,11 +96,19 @@ public class Manager{
     public void removeObserver(Observer o){// I guess la meme
         observers.remove(o);
     }
-    public void update(){
+
+    public void notifyObserver(){
         for(Observer o : observers){
             o.update();
         }
-        //ui.notify(); // Fonction notify à mettre dans la classe UI
-        
+    }
+    public void printWorld(){
+        ui.printWorld();
+    }
+    public void waitEntry(){
+        ui.waitEntry();
+    }
+    public void printResource(){
+        ui.printResource();
     }
 }
