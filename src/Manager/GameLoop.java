@@ -4,18 +4,13 @@ public class GameLoop {
     Manager manager;
     public GameLoop(Manager manager) {
         this.manager = manager;
-        while (true){
-            loop();
-        }
     }
-    private void loop(){
-        
+    public void loop(){
         while (true){
             manager.printWorld();
-            //printressources
+            manager.printResource();
             manager.waitEntry();
             manager.notifyObserver();
-
         }
     }
 }

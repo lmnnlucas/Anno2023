@@ -108,4 +108,7 @@ public class Manager{
     public void waitEntry(){
         ui.waitEntry();
     }
+    public void printResource(){
+        ui.printResource();
+    }
 }
