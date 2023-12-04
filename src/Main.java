@@ -7,12 +7,8 @@ import Game.*;
 public class Main {
     public static void main(String[] args)
         {
-            Manager manager = new Manager(10 , 10);
-            UI ui = new UI(manager);
-            manager.setBuilding(new Position(1,1),new CementPlant());
-            ui.printWorld();
-            ui.printResource();
-            ui.waitEntry();
-            ui.printWorld();
+            Manager manager = new Manager();
+            GameLoop gameLoop = new GameLoop(manager);
+            gameLoop.loop();
         }
     }
