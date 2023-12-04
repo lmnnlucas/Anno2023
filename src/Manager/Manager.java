@@ -82,7 +82,7 @@ public class Manager{
     public HashMap<Position,Building> getBuildings(){
         return building;
     }
-    public void setBuild(Position pos,Building b){
+    public void setBuilding(Position pos,Building b){
         building.put(pos,b);
     }
     public void addRound(){
