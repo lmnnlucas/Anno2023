@@ -1,4 +1,4 @@
-package Game.UI;
+package UI;
 
 public enum WorldEntity
 {
@@ -18,4 +18,8 @@ public enum WorldEntity
         this.code = code;
     }
 
+    public char getCode()
+    {
+        return code;
+    }
 }

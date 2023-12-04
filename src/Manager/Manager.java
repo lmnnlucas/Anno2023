@@ -31,6 +31,7 @@ public class Manager{
         put(Resource.TOOLS, 0);
     }};
     private HashMap<Position,Building> building = new HashMap<>();
+    private ArrayList<Citizen> citizens = new ArrayList<>();
     private ArrayList<Citizen> citizens = new ArrayList<>(); 
 
     public Manager(int width,int height){
@@ -40,7 +41,7 @@ public class Manager{
         citizens.add(new Citizen(building.get((new Position(0,0)))));
         initializeObserver();
     }
-  
+
     public Manager(){
         this.width = 10;
         this.height = 10;
