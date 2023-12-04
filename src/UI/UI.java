@@ -81,7 +81,34 @@ public class UI
                 return null;
         }
     }
-    //fonction à appeler avant le print pour mettre à jour le monde
+
+    private static WorldEntity transformCharToEntity(char c)
+    {
+        switch(c)
+        {
+            case 'W':
+                return WorldEntity.WOODEN_CABIN;
+            case 'H':
+                return WorldEntity.HOUSE;
+            case 'A':
+                return WorldEntity.APARTMENTBUILDING;
+            case 'F':
+                return WorldEntity.FARM;
+            case 'Q':
+                return WorldEntity.QUARRY;
+            case 'L':
+                return WorldEntity.LUMBERMILL;
+            case 'C':
+                return WorldEntity.CEMENTPLANT;
+            case 'S':
+                return WorldEntity.STEELMILL;
+            case 'T':
+                return WorldEntity.TOOLFACTORY;
+            default:
+                return WorldEntity.NOTHING;
+        }
+    }
+
     public void buildWorld()
     {
         for(int x = 0; x < width; x++)
@@ -89,7 +116,7 @@ public class UI
             for(int y = 0; y < height; y++)
             {
                 Position position = new Position(x, y);
-                world[x][y] = transfromBuildingToWorldEntity(manager.getBuilding().get(position)); // A mettre Manager.getWorld().getEntityAt(x, y);
+                world[x][y] = transfromBuildingToWorldEntity(manager.getBuilding().get(position));
             }
         }
     }
@@ -119,6 +146,7 @@ public class UI
     {
         while(true)
         {
+            System.out.println("You can type h to get help");
             Scanner sc = new Scanner(System.in);
             String value = sc.nextLine();
             if(value.equals("h"))
@@ -140,6 +168,7 @@ public class UI
                 System.out.println("T : Tool Factory");
                 System.out.println("E : Exit");
                 System.out.println("h : Help");
+                continue;
             }
             if (value.equals("E"))
             {
@@ -148,19 +177,43 @@ public class UI
             }
             else
             {
-                if(value.length() > 3)
+                char c = value.charAt(0);
+                int x = Integer.parseInt(value.substring(2,3));
+                int y = Integer.parseInt(value.substring(4,5));
+                Position position = new Position(x, y);
+                if(c == 'W' || c == 'H' || c == 'A' || c == 'F' || c == 'Q' || c == 'L' || c == 'C' || c == 'S' || c == 'T')
                 {
-                    char c = value.charAt(0);
-                    int x = Integer.parseInt(value.substring(1,2));
-                    int y = Integer.parseInt(value.substring(2,3));
-                    Position position = new Position(x, y);
+                    Building building = transfromWorldEntityToBuilding(transformCharToEntity(c));
+                    //manager.setBuilding(building, position);
+                    System.out.println("Building added");
+                }
+                else if(c == '+')
+                {
+                    //manager.addWorker(position);
+                    System.out.println("Worker added");
+                }
+                else if(c == '-')
+                {
+                    //manager.removeWorker(position);
+                    System.out.println("Worker removed");
+                }
+                else if(c == 'I')
+                {
+                    Building building = manager.getBuilding().get(position);
+                    System.out.println("Building : " + building.getName());
+                    /*System.out.println("Workers : " + building.getWorkers());
+                    System.out.println("Production : " + building.getProduction());
+                    System.out.println("Consumption : " + building.getConsumption());
+                    System.out.println("Storage : " + building.getStorage());
+                    System.out.println("Storage Capacity : " + building.getStorageCapacity());
+                    System.out.println("Workers Capacity : " + building.getWorkersCapacity());*/
                 }
                 else
                 {
                     System.out.println("Wrong entry");
                 }
             }
+            }
         }
     }
 
-}
