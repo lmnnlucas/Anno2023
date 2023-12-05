@@ -23,8 +23,8 @@ public class BuildingsConsumingObserver implements Observer {
                     manager.setResource(resource, -manager.getNumberRessource(resource));
                 }
                 else {
-                    manager.setResource(resource, -building.getResourcesConsumption().get(resource));
-                    manager.setResource(resource, building.getResourcesGenerating().get(resource));
+                    manager.setResource(resource, -building.getResourcesConsumption().get(resource)* building.getNumberofWorkers()/building.getWorkersCapacity());
+                    manager.setResource(resource, building.getResourcesGenerating().get(resource) *building.getNumberofWorkers()/building.getWorkersCapacity());
                 }
             }
         }
