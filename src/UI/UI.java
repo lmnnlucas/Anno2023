@@ -1,8 +1,7 @@
 package UI;
 
 import Game.Buildings.*;
-import Game.Exceptions.NoBuildingAtPosException;
-import Game.Exceptions.WrongEntryException;
+import Exceptions.WrongEntryException;
 import Game.Position;
 import Game.Resource;
 import Manager.Manager;

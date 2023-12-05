@@ -1,4 +1,4 @@
-package Game.Exceptions;
+package Exceptions;
 
 public class WrongEntryException extends RuntimeException {
     public WrongEntryException(String message, Throwable err) {

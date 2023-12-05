@@ -1,4 +1,4 @@
-package Game.Exceptions;
+package Exceptions;
 
 public class NoBuildingAtPosException extends RuntimeException {
     public NoBuildingAtPosException(String message, Throwable cause) {
