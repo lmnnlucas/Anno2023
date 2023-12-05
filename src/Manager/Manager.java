@@ -118,7 +118,7 @@ public class Manager{
         ui.printResource();
     }
 
-    public void AddWorkerFromBuilding(Building b,int number){
+    public void AddWorkerToABuilding(Building b,int number){
         int cpt = 0;
         for (int i = 0; i< citizens.size();i++){
             if (citizens.get(i).getWorkplace() == null){
@@ -135,7 +135,7 @@ public class Manager{
         addRound();
     }
 
-    public void removeWorkerFromBuilding(Building b,int number){
+    public void removeWorkerToABuilding(Building b,int number){
         int cpt = 0;
         for (int i = 0; i< citizens.size();i++){
             if (citizens.get(i).getWorkplace() == b){
@@ -152,7 +152,7 @@ public class Manager{
         addRound();
     }
 
-    public void addCitizenFromBuilding(Building b,int number){
+    public void addCitizenToABuilding(Building b,int number){
         int cpt = 0;
         for (int i = 0; i< citizens.size();i++){
             if (citizens.get(i).getHome() == null){
@@ -169,7 +169,7 @@ public class Manager{
         addRound();
     }
 
-    public void removeCitizenFromBuilding(Building b,int number){
+    public void removeCitizenToABuilding(Building b,int number){
         int cpt = 0;
         for (int i = 0; i< citizens.size();i++){
             if (citizens.get(i).getHome() == b){
