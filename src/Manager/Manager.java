@@ -135,7 +135,7 @@ public class Manager{
         addRound();
     }
 
-    public void removeWorkerToABuilding(Building b,int number){
+    public void removeWorkerFromBuilding(Building b,int number){
         int cpt = 0;
         for (int i = 0; i< citizens.size();i++){
             if (citizens.get(i).getWorkplace() == b){
@@ -169,7 +169,7 @@ public class Manager{
         addRound();
     }
 
-    public void removeCitizenToABuilding(Building b,int number){
+    public void removeCitizenFromBuilding(Building b,int number){
         int cpt = 0;
         for (int i = 0; i< citizens.size();i++){
             if (citizens.get(i).getHome() == b){
