@@ -144,12 +144,12 @@ public class UI
         System.out.print(" Tools : " + manager.getNumberRessource(Resource.TOOLS));
     }
 
-    public void waitEntry() {
-        while (true) {
+
+    public void waitEntry(){
+        while(true) {
             try {
                 System.out.println();
                 System.out.println("You can type h to get help");
-                System.out.print("> ");
                 Scanner sc = new Scanner(System.in);
                 String value = sc.nextLine();
                 if (value.equals("h")) {
@@ -196,110 +196,26 @@ public class UI
                             System.out.println("Worker removed");
                             break;
                         } else if (c == 'I') {
-                            try {
-                                Building building = manager.getBuildings().get(position);
-                                System.out.println("Building : " + building.getName());
-                    /*System.out.println("Workers : " + building.getWorkers());
-                    System.out.println("Production : " + building.getProduction());
-                    System.out.println("Consumption : " + building.getConsumption());
-                    System.out.println("Storage : " + building.getStorage());
-                    System.out.println("Storage Capacity : " + building.getStorageCapacity());
-                    System.out.println("Workers Capacity : " + building.getWorkersCapacity());*/
-                                break;
-                            } catch (NullPointerException e) {
-                                throw new NoBuildingAtPosException("No building at position " + x + " " + y, e);
-                            }
+                            Building building = manager.getBuildings().get(position);
+                            System.out.println("Building : " + building.getName());
+                            System.out.println("Citizens : " + building.getNumberofCitizens());
+                            System.out.println("Workers : " + building.getNumberofWorkers());
+                            System.out.println("Production : " + building.getResourcesGenerating());
+                            System.out.println("Consumption : " + building.getResourcesConsumption());
+                            break;
                         } else if (c == 'R') {
                             manager.getBuildings().remove(position);
                             System.out.println("Building removed");
                             break;
                         } else {
-                            throw new WrongEntryException("Entrée '" + c + "' isn't recognized");
+                            throw new WrongEntryException("Entry not recognized");
                         }
-                    } catch (StringIndexOutOfBoundsException e) {
-                        throw new WrongEntryException("Missing argument", e);
+                    } catch (NullPointerException e) {
+                        throw new WrongEntryException("Missing arguments");
                     }
-    public void waitEntry()
-    {
-        while(true)
-        {
-            System.out.println();
-            System.out.println("You can type h to get help");
-            Scanner sc = new Scanner(System.in);
-            String value = sc.nextLine();
-            if(value.equals("h"))
-            {
-                System.out.println(" -- WELCOME TO THE HELP -- ");
-                System.out.println("For all manipulation you need to enter the position of the building");
-                System.out.println("Exemple : W 1 2 -> Add a wooden cabin at the position 1 2");
-                System.out.println("+ : Add a workers to a building (We will ask for the position of the building)");
-                System.out.println("- : Remove a workers to a building (We will ask for the position of the building)");
-                System.out.println("I : To get information about a building (We will ask for the position of the building)");
-                System.out.println("W : Wooden Cabin ");
-                System.out.println("H : House");
-                System.out.println("A : Apartment Building");
-                System.out.println("F : Farm");
-                System.out.println("Q : Quarry");
-                System.out.println("L : Lumber Mill");
-                System.out.println("C : Cement Plant");
-                System.out.println("S : Steel Mill");
-                System.out.println("T : Tool Factory");
-                System.out.println("R : Remove a building (We will ask for the position of the building)");
-                System.out.println("E : Exit");
-                System.out.println("h : Help");
-                continue;
-            }
-            if (value.equals("E"))
-            {
-                System.out.println(" -- GOODBYE -- ");
-                break;
-            }
-            else
-            {
-                char c = value.charAt(0);
-                int x = Integer.parseInt(value.substring(2,3));
-                int y = Integer.parseInt(value.substring(4,5));
-                Position position = new Position(x, y);
-                if(c == 'W' || c == 'H' || c == 'A' || c == 'F' || c == 'Q' || c == 'L' || c == 'C' || c == 'S' || c == 'T')
-                {
-                    Building building = transfromWorldEntityToBuilding(transformCharToEntity(c));
-                    manager.setBuilding(position , building);
-                    System.out.println("Building added");
-                    break;
                 }
-                else if(c == '+')
-                {
-                    //manager.addWorker(position);
-                    System.out.println("Worker added");
-                    break;
-                }
-                else if(c == '-')
-                {
-                    //manager.removeWorker(position);
-                    System.out.println("Worker removed");
-                    break;
-                }
-                else if(c == 'I')
-                {
-                    Building building = manager.getBuildings().get(position);
-                    System.out.println("Building : " + building.getName());
-                    System.out.println("Citizens : " + building.getNumberofCitizens());
-                    System.out.println("Workers : " + building.getNumberofWorkers());
-                    System.out.println("Production : " + building.getResourcesGenerating());
-                    System.out.println("Consumption : " + building.getResourcesConsumption());
-                    break;
-                }
-                else if(c == 'R')
-                {
-                    manager.getBuildings().remove(position);
-                    System.out.println("Building removed");
-                    break;
-                }
-                else
-                {
-                    System.out.println("Wrong entry");
-                    continue;
-                }
+            } catch (Exception e){
+                System.err.println(e.getMessage());
             }
         }
     }
