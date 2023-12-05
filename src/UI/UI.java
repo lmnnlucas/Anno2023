@@ -210,7 +210,7 @@ public class UI
                         } else {
                             throw new WrongEntryException("Entry not recognized");
                         }
-                    } catch (NullPointerException e) {
+                    } catch (StringIndexOutOfBoundsException e) {
                         throw new WrongEntryException("Missing arguments");
                     }
                 }
