@@ -29,10 +29,10 @@ public class BuildingsConsumingObserver implements Observer {
                     }
                 }
             }
-
             if (building.getResourcesGenerating() != null && building.getWorkersCapacity() != 0) {
                 for (Resource resource : building.getResourcesGenerating().keySet()) {
                     manager.setResource(resource, building.getResourcesGenerating().get(resource) * building.getNumberofWorkers() / building.getWorkersCapacity());
+                    System.out.println(building.getName() + " is producing " + building.getResourcesGenerating().get(resource) * building.getNumberofWorkers() / building.getWorkersCapacity() + " " + resource);
                 }
             } else if (building.getWorkersCapacity() == 0) {
                 System.out.println(building.getName() + " is not producing anything because it has no workers.");
