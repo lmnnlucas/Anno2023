@@ -55,6 +55,7 @@ public class Manager{
     public void initializeObserver(){
         observers.add(new BuildingsConsumingObserver(this));
         observers.add(new CitizenConsumingObserver(this));
+        observers.add(new CitizenBirthObserver(this));
     }
 
     public int getWidth(){
