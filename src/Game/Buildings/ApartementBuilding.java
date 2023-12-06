@@ -17,4 +17,10 @@ public class ApartementBuilding extends Building
 
         this.setResourcesGenerating(null);
     }
+
+    @Override
+    public boolean isAHome()
+    {
+        return true;
+    }
 }

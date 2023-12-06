@@ -177,6 +177,7 @@ public class UI
         System.out.println("Round : " + manager.getRound());
         System.out.println(" -- RESOURCES -- ");
         System.out.print("Food : " + manager.getNumberRessource(Resource.FOOD));
+        System.out.print(" | Citizens : " + manager.getCitizens().size());
         System.out.print(" | Wood : " + manager.getNumberRessource(Resource.WOOD));
         System.out.print(" | Stone : " + manager.getNumberRessource(Resource.STONE));
         System.out.print(" | Coal : " + manager.getNumberRessource(Resource.COAL));

@@ -178,4 +178,9 @@ public abstract class Building {
     public void BuildingLoggerError(String arg) {
         System.err.println("[" + this.name + "]" + arg);
     }
+
+    public boolean isAHome()
+    {
+        return false;
+    }
 }
