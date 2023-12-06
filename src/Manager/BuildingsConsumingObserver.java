@@ -17,7 +17,6 @@ public class BuildingsConsumingObserver implements Observer {
     @Override
     public void update() {
         for (Building building : manager.getBuildings().values()) {
-
             if (building.getResourcesConsumption() != null) {
 
                 for (Resource resource : building.getResourcesConsumption().keySet()) {

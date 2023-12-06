@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
+import Exceptions.BuildingException;
 import Game.Position;
 import Game.Resource;
 import Game.Buildings.Building;
@@ -146,68 +147,76 @@ public class Manager{
 
     public void AddWorkerToABuilding(Building b,int number){
         int cpt = 0;
-        for (int i = 0; i< citizens.size();i++){
-            if (citizens.get(i).getWorkplace() == null){
-                b.addWorker(citizens.get(i));
-                cpt ++;
-                if (cpt == number){
-                break;
+        try {
+            for (int i = 0; i < citizens.size(); i++) {
+                if (citizens.get(i).getWorkplace() == null) {
+                    b.addWorker(citizens.get(i));
+                    cpt++;
+                    if (cpt == number) {
+                        break;
+                    }
                 }
             }
         }
-        if (cpt < number){
-            System.out.println("ratio");
+        catch (BuildingException e){
+            System.err.println("Only " + cpt + " workers added to " + b.getName());
         }
         addRound();
     }
 
     public void removeWorkerFromBuilding(Building b,int number){
         int cpt = 0;
-        for (int i = 0; i< citizens.size();i++){
-            if (citizens.get(i).getWorkplace() == b){
-                b.removeWorker(citizens.get(i));
-                cpt ++;
-                if (cpt == number){
-                    break;
+        try {
+            for (int i = 0; i < citizens.size(); i++) {
+                if (citizens.get(i).getWorkplace() == b) {
+                    b.removeWorker(citizens.get(i));
+                    cpt++;
+                    if (cpt == number) {
+                        break;
+                    }
                 }
             }
         }
-        if (cpt < number){
-            System.out.println("ratio");
+        catch (BuildingException e){
+            System.err.println("Only " + cpt + " workers removed from " + b.getName());
         }
         addRound();
     }
 
     public void addCitizenToABuilding(Building b,int number){
         int cpt = 0;
-        for (int i = 0; i< citizens.size();i++){
-            if (citizens.get(i).getHome() == null){
-                b.addCitizen(citizens.get(i));
-                cpt++;
-                if (cpt == number){
-                    break;
+        try {
+            for (int i = 0; i < citizens.size(); i++) {
+                if (citizens.get(i).getHome() == null) {
+                    b.addCitizen(citizens.get(i));
+                    cpt++;
+                    if (cpt == number) {
+                        break;
+                    }
                 }
             }
         }
-        if (cpt < number){
-            System.out.println("ratio");
+        catch (BuildingException e){
+            System.err.println("Only " + cpt + " citizen added to " + b.getName());
         }
         addRound();
     }
 
     public void removeCitizenFromBuilding(Building b,int number){
         int cpt = 0;
-        for (int i = 0; i< citizens.size();i++){
-            if (citizens.get(i).getHome() == b){
-                b.removeCitizen(citizens.get(i));
-                cpt++;
-                if (cpt == number){
-                    break;
+        try {
+            for (int i = 0; i < citizens.size(); i++) {
+                if (citizens.get(i).getHome() == b) {
+                    b.removeCitizen(citizens.get(i));
+                    cpt++;
+                    if (cpt == number) {
+                        break;
+                    }
                 }
             }
         }
-        if (cpt < number){
-            System.out.println("ratio");
+        catch (BuildingException e){
+            System.err.println("Only " + cpt + " workers removed from " + b.getName());
         }
         addRound();
     }
