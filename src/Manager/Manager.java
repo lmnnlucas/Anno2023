@@ -44,7 +44,7 @@ public class Manager{
     /**
      * List of resources of the player
      */
-    private HashMap<HashMap<Position,Building>,Integer> waitingTime = new HashMap<>(); // PAS BO
+    private HashMap<HashMap<Position,Building>,Integer> waitingTime = new HashMap<>();
     private HashMap<Resource,Integer> resources = new HashMap<>(){{ //Config initial
         put(Resource.GOLD, 10);
         put(Resource.FOOD, 100);
@@ -99,6 +99,7 @@ public class Manager{
     private void initializeObserver(){
         observers.add(new BuildingsConsumingObserver(this));
         observers.add(new CitizenConsumingObserver(this));
+        observers.add(new CitizenBirthObserver(this));
     }
     /**
      * Getter of the width
@@ -121,7 +122,7 @@ public class Manager{
     public int getRound(){
         return round;
     }
-
+  
     /**
      * Getter of the number of a ressource
      * @param r ressource to get
@@ -272,8 +273,8 @@ public class Manager{
 
     /**
      * Add workers to a building
-     * @param c citizen to add
-     * @param b building where the citizen is added
+     * @param number number of workers added
+     * @param b building where the workers are added
      */
     public void AddWorkerToABuilding(Building b,int number){
         int cpt = 0;
@@ -405,7 +406,7 @@ public class Manager{
         return false;
     }
     
-    public void updateWaitingTimeBuilding() { // AAAAAAAAAAAAAAAAAAAAAAAH LES ACCES CONCURENTIELS
+    public void updateWaitingTimeBuilding() {
         Iterator<HashMap<Position, Building>> iterator = waitingTime.keySet().iterator();
         while (iterator.hasNext()) {
             HashMap<Position, Building> b = iterator.next();
