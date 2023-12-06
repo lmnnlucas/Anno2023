@@ -10,11 +10,14 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Scanner;
 
+/**
+ * This class is only used to display the game in the console
+ */
 public class UI
 {
     private Manager manager;
-    private int width = 10; //manager.getWidth();
-    private int height = 10; //manager.getHeight();
+    private int width = manager.getWidth();
+    private int height = manager.getHeight();
     private WorldEntity[][] world;
 
     public UI(Manager manager)
@@ -23,9 +26,11 @@ public class UI
         world = new WorldEntity[width][height];
     }
 
-
-    //public void UI(){}
-
+    /*
+        * This method is used to transform a building to a WorldEntity
+        * @param building the building to transform
+        * @return the WorldEntity corresponding to the building
+     */
     private static WorldEntity transfromBuildingToWorldEntity(Building building)
     {
         if(building == null)
@@ -56,6 +61,11 @@ public class UI
         return null;
     }
 
+    /*
+        * This method is used to transform a WorldEntity to a building
+        * @param worldEntity the WorldEntity to transform
+        * @return the building corresponding to the WorldEntity
+     */
     private static Building transfromWorldEntityToBuilding(WorldEntity worldEntity)
     {
         switch(worldEntity)
@@ -83,6 +93,12 @@ public class UI
         }
     }
 
+    /*
+        * This method is used to transform a char to a WorldEntity
+        * @param c the char to transform
+        * @return the WorldEntity corresponding to the char
+        * Used with associated method transformWorldEntityToBuilding
+     */
     private static WorldEntity transformCharToEntity(char c)
     {
         switch(c)
@@ -110,6 +126,11 @@ public class UI
         }
     }
 
+    /*
+        * This method is used to fill the WorldEntity tab
+        * The WorldEntity tab is used to display the game in the console
+     */
+
     public void buildWorld()
     {
         for(int x = 0; x < width; x++)
@@ -122,7 +143,14 @@ public class UI
         }
     }
 
-
+    /*
+        * This method is used to display the game in the console
+        * A game is in the form :
+        * H_x_x
+        * x_W_x
+        * x_x_x
+        * A game 3x3 with a house at the position 0 0 and a wooden cabin at the position 1 1
+     */
     public void printWorld()
     {
         buildWorld();
@@ -140,20 +168,27 @@ public class UI
         }
     }
 
+    /*
+        * This method is used to display the resources in the console
+     */
     public void printResource()
     {
         System.out.println("Round : " + manager.getRound());
         System.out.println(" -- RESOURCES -- ");
-        System.out.print("Wood : " + manager.getNumberRessource(Resource.WOOD));
-        System.out.print(" Stone : " + manager.getNumberRessource(Resource.STONE));
-        System.out.print(" Coal : " + manager.getNumberRessource(Resource.COAL));
-        System.out.print(" Iron : " + manager.getNumberRessource(Resource.IRON));
-        System.out.print(" Steel : " + manager.getNumberRessource(Resource.STEEL));
-        System.out.print(" Cement : " + manager.getNumberRessource(Resource.CEMENT));
-        System.out.print(" Lumber : " + manager.getNumberRessource(Resource.LUMBER));
-        System.out.print(" Tools : " + manager.getNumberRessource(Resource.TOOLS));
+        System.out.print("Food : " + manager.getNumberRessource(Resource.FOOD));
+        System.out.print(" | Wood : " + manager.getNumberRessource(Resource.WOOD));
+        System.out.print(" | Stone : " + manager.getNumberRessource(Resource.STONE));
+        System.out.print(" | Coal : " + manager.getNumberRessource(Resource.COAL));
+        System.out.print(" | Iron : " + manager.getNumberRessource(Resource.IRON));
+        System.out.print(" | Steel : " + manager.getNumberRessource(Resource.STEEL));
+        System.out.print(" | Cement : " + manager.getNumberRessource(Resource.CEMENT));
+        System.out.print(" | Lumber : " + manager.getNumberRessource(Resource.LUMBER));
+        System.out.print(" | Tools : " + manager.getNumberRessource(Resource.TOOLS));
     }
 
+    /*
+        This method is used to get the entry of the user
+     */
     public void waitEntry()
     {
         while(true)
@@ -167,9 +202,9 @@ public class UI
                 System.out.println(" -- WELCOME TO THE HELP -- ");
                 System.out.println("For all manipulation you need to enter the position of the building");
                 System.out.println("Exemple : W 1 2 -> Add a wooden cabin at the position 1 2");
-                System.out.println("+ : Add a workers to a building (We will ask for the position of the building)");
-                System.out.println("- : Remove a workers to a building (We will ask for the position of the building)");
-                System.out.println("I : To get information about a building (We will ask for the position of the building)");
+                System.out.println("+ : Add a workers to a building (We will ask the number of workers you want to add)");
+                System.out.println("- : Remove a workers to a building (We will ask the number of workers you want to remove)");
+                System.out.println("I : To get information about a building");
                 System.out.println("W : Wooden Cabin ");
                 System.out.println("H : House");
                 System.out.println("A : Apartment Building");
@@ -204,13 +239,19 @@ public class UI
                 }
                 else if(c == '+')
                 {
-                    //manager.addWorker(position);
+                    System.out.println("How many workers do you want to add ?");
+                    int number = sc.nextInt();
+                    Building building = manager.getBuildings().get(position);
+                    manager.AddWorkerToABuilding(building , number);
                     System.out.println("Worker added");
                     break;
                 }
                 else if(c == '-')
                 {
-                    //manager.removeWorker(position);
+                    System.out.println("How many workers do you want to remove ?");
+                    int number = sc.nextInt();
+                    Building building = manager.getBuildings().get(position);
+                    manager.removeWorkerFromBuilding(building , number);
                     System.out.println("Worker removed");
                     break;
                 }
@@ -226,7 +267,7 @@ public class UI
                 }
                 else if(c == 'R')
                 {
-                    manager.getBuildings().remove(position);
+                    manager.removeBuilding(position);
                     System.out.println("Building removed");
                     break;
                 }
