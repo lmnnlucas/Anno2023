@@ -1,5 +1,6 @@
 package Game.Buildings;
 
+import Exceptions.BuildingException;
 import Game.People.Citizen;
 import Game.Resource;
 
@@ -111,9 +112,9 @@ public abstract class Building {
             this.citizens.add(citizen);
             this.citizensCount++;
             citizen.setHome(this);
-            BuildingLogger("Citizen added");
+            System.out.println("Citizen added");
         } else {
-            BuildingLoggerError("Citizen capacity reached");
+            throw new BuildingException("Citizen capacity of  " + this.getName() + " reached");
         }
     }
 
@@ -121,10 +122,10 @@ public abstract class Building {
         if (this.workersCount < this.workersCapacity) {
             this.workers.add(citizen);
             this.workersCount++;
-            BuildingLogger("Worker added");
+            System.out.println("Worker added");
             citizen.setWorkplace(this);
         } else {
-            BuildingLoggerError("Worker capacity reached");
+            throw new BuildingException("Worker capacity of  " + this.getName() + " reached");
         }
     }
 
@@ -135,13 +136,13 @@ public abstract class Building {
                     this.citizens.remove(i);
                     this.citizensCount--;
                     this.citizens.get(i).setHome(null);
-                    BuildingLogger("Citizen removed");
+                    System.out.println("Citizen removed");
                     break;
                 }
-                BuildingLoggerError("Citizen not found");
             }
+            throw new BuildingException("Citizen not found");
         } else {
-            BuildingLoggerError("No citizen to remove");
+            throw new BuildingException("No citizen to remove");
         }
     }
 
@@ -152,13 +153,13 @@ public abstract class Building {
                     this.workers.remove(i);
                     this.workersCount--;
                     this.citizens.get(i).setWorkplace(null);
-                    BuildingLogger("Worker removed");
+                    System.out.println("Worker removed");
                     break;
                 }
-                BuildingLoggerError("Worker not found");
             }
+            throw new BuildingException("Worker not found");
         } else {
-            BuildingLoggerError("No worker to remove");
+            throw new BuildingException("No worker to remove");
         }
     }
 
@@ -170,13 +171,6 @@ public abstract class Building {
     public int getNumberofWorkers()
     {
         return this.workersCount;
-    }
-    public void BuildingLogger(String arg) {
-        System.out.println("[" + this.name + "]" + arg);
-    }
-
-    public void BuildingLoggerError(String arg) {
-        System.err.println("[" + this.name + "]" + arg);
     }
 
     public boolean isAHome()
