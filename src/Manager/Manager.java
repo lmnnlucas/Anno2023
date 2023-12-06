@@ -86,22 +86,15 @@ public class Manager{
     }
     public void setBuilding(Position pos,Building b){
         building.put(pos,b);
-        if (resources.get(Resource.GOLD) >= b.getResourcesNeeded().get(Resource.GOLD) && resources.get(Resource.WOOD) >= b.getResourcesNeeded().get(Resource.WOOD) && resources.get(Resource.STONE) >= b.getResourcesNeeded().get(Resource.STONE)){
-            System.out.println("Not enough gold");
+        for (Resource r : b.getResourcesNeeded().keySet()){
+            if (resources.get(r) >= b.getResourcesNeeded().get(r)){
+                resources.put(r,resources.get(r) - b.getResourcesNeeded().get(r));
+            }
+            else{
+                System.out.println("Not enought "+ r + " to build this building");
+            }
         }
-        else{
-            resources.put(Resource.GOLD, resources.get(Resource.GOLD)-b.getResourcesNeeded().get(Resource.GOLD));
-            resources.put(Resource.WOOD, resources.get(Resource.WOOD)-b.getResourcesNeeded().get(Resource.WOOD));
-            resources.put(Resource.STONE, resources.get(Resource.STONE)-b.getResourcesNeeded().get(Resource.STONE));
-            addRound();
-        }
-        /* Pas Obligatoire pour la  version de base
-        resources.put(Resource.IRON, resources.get(Resource.IRON)-b.getResourcesNeeded().get(Resource.IRON));
-        resources.put(Resource.COAL, resources.get(Resource.COAL)-b.getResourcesNeeded().get(Resource.COAL));
-        resources.put(Resource.CEMENT, resources.get(Resource.CEMENT)-b.getResourcesNeeded().get(Resource.CEMENT));
-        resources.put(Resource.LUMBER, resources.get(Resource.LUMBER)-b.getResourcesNeeded().get(Resource.LUMBER));
-        resources.put(Resource.TOOLS, resources.get(Resource.TOOLS)-b.getResourcesNeeded().get(Resource.TOOLS));
-        */
+        addRound();
     }
     public void removeBuilding(Position pos){
         building.remove(pos);
