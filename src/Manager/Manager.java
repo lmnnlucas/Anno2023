@@ -90,11 +90,33 @@ public class Manager{
     }
     public void setBuilding(Position pos,Building b){
         building.put(pos,b);
+        resources.put(Resource.GOLD, resources.get(Resource.GOLD)-b.getResourcesNeeded().get(Resource.GOLD));
+        resources.put(Resource.WOOD, resources.get(Resource.WOOD)-b.getResourcesNeeded().get(Resource.WOOD));
+        resources.put(Resource.STONE, resources.get(Resource.STONE)-b.getResourcesNeeded().get(Resource.STONE));
         addRound();
+
+        /* Pas Obligatoire pour la  version de base
+        resources.put(Resource.IRON, resources.get(Resource.IRON)-b.getResourcesNeeded().get(Resource.IRON));
+        resources.put(Resource.COAL, resources.get(Resource.COAL)-b.getResourcesNeeded().get(Resource.COAL));
+        resources.put(Resource.CEMENT, resources.get(Resource.CEMENT)-b.getResourcesNeeded().get(Resource.CEMENT));
+        resources.put(Resource.LUMBER, resources.get(Resource.LUMBER)-b.getResourcesNeeded().get(Resource.LUMBER));
+        resources.put(Resource.TOOLS, resources.get(Resource.TOOLS)-b.getResourcesNeeded().get(Resource.TOOLS));
+        */
     }
     public void removeBuilding(Position pos){
         building.remove(pos);
+        resources.put(Resource.GOLD,resources.get(Resource.GOLD) + building.get(pos).getResourcesNeeded().get(Resource.GOLD)/2);
+        resources.put(Resource.WOOD,resources.get(Resource.WOOD) + building.get(pos).getResourcesNeeded().get(Resource.WOOD)/2);
+        resources.put(Resource.STONE,resources.get(Resource.STONE) + building.get(pos).getResourcesNeeded().get(Resource.STONE)/2);
         addRound();
+        
+        /* Pas Obligatoire pour la  version de base
+        resources.put(Resource.IRON,resources.get(Resource.IRON) + building.get(pos).getResourcesNeeded().get(Resource.IRON)/2);
+        resources.put(Resource.COAL,resources.get(Resource.COAL) + building.get(pos).getResourcesNeeded().get(Resource.COAL)/2);
+        resources.put(Resource.CEMENT,resources.get(Resource.CEMENT) + building.get(pos).getResourcesNeeded().get(Resource.CEMENT)/2);
+        resources.put(Resource.LUMBER,resources.get(Resource.LUMBER) + building.get(pos).getResourcesNeeded().get(Resource.LUMBER)/2);
+        resources.put(Resource.TOOLS,resources.get(Resource.TOOLS) + building.get(pos).getResourcesNeeded().get(Resource.TOOLS)/2);
+         */
     }
     public void addRound(){
         round++;
