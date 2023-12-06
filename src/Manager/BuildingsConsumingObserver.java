@@ -6,14 +6,26 @@ import Game.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Observer that is notified each round to check if the buildings are consuming and/or generating resources and update the manager's resources
+ */
 public class BuildingsConsumingObserver implements Observer {
 
     private Manager manager;
-    private ArrayList<Building> buildings;
+
+    /**
+     * Constructor for BuildingsConsumingObserver
+     * @param manager Manager of the game
+     */
     public BuildingsConsumingObserver(Manager manager) {
         this.manager = manager;
     }
 
+    /**
+     * Checks if the buildings are consuming resources and if they are generating resources.
+     * If they are consuming resources, it checks if the manager has enough resources to run the building.
+     * If the building has no workers, it does not generate anything
+     */
     @Override
     public void update() {
         for (Building building : manager.getBuildings().values()) {
