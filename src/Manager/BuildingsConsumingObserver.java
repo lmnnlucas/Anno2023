@@ -17,21 +17,26 @@ public class BuildingsConsumingObserver implements Observer {
     @Override
     public void update() {
         for (Building building : manager.getBuildings().values()) {
-            if (building.getResourcesConsumption() == null){ 
-                System.out.println(building.getName() + " doesn't consume anything.");
-                continue;
+
+            if (building.getResourcesConsumption() != null) {
+
+                for (Resource resource : building.getResourcesConsumption().keySet()) {
+
+                    if (manager.getNumberRessource(resource) < building.getResourcesConsumption().get(resource)) {
+                        System.out.println("Not enough " + resource + " to run " + building.getName() + ". It will not produce anything.");
+                        manager.setResource(resource, -manager.getNumberRessource(resource));
+                    } else {
+                        manager.setResource(resource, -building.getResourcesConsumption().get(resource) * building.getNumberofWorkers() / building.getWorkersCapacity());
+                    }
+                }
             }
-            for (Resource resource : building.getResourcesConsumption().keySet()) {
-                if (manager.getNumberRessource(resource) < building.getResourcesConsumption().get(resource)) {
-                    System.out.println("Not enough " + resource + " to run " + building.getName() + ". It will not produce anything.");
-                    manager.setResource(resource, -manager.getNumberRessource(resource));
+            if (building.getResourcesGenerating() != null && building.getWorkersCapacity() != 0) {
+                for (Resource resource : building.getResourcesGenerating().keySet()) {
+                    manager.setResource(resource, building.getResourcesGenerating().get(resource) * building.getNumberofWorkers() / building.getWorkersCapacity());
+                    System.out.println(building.getName() + " is producing " + building.getResourcesGenerating().get(resource) * building.getNumberofWorkers() / building.getWorkersCapacity() + " " + resource);
                 }
-                else {
-                    if (building.getResourcesConsumption().get(resource) != null)
-                        manager.setResource(resource, -building.getResourcesConsumption().get(resource)* building.getNumberofWorkers()/building.getWorkersCapacity());
-                    if (building.getResourcesGenerating().get(resource) != null)
-                        manager.setResource(resource, building.getResourcesGenerating().get(resource) *building.getNumberofWorkers()/building.getWorkersCapacity());
-                }
+            } else if (building.getWorkersCapacity() == 0) {
+                System.out.println(building.getName() + " is not producing anything because it has no workers.");
             }
         }
     }
