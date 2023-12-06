@@ -1,5 +1,6 @@
 package Manager;
 
+import Exceptions.CitizenException;
 import Game.Buildings.Building;
 import Game.People.Citizen;
 import Game.Position;
@@ -50,6 +51,6 @@ public class CitizenBirthObserver implements Observer
                 }
             }
         }
-        throw new RuntimeException("No home available , you need to build a new one");
+        throw new CitizenException("No home available , you need to build a new one");
     }
 }
