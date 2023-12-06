@@ -18,7 +18,10 @@ jobs:
 
     steps:
       - name: Setup Java JDK
-        uses: actions/setup-java@v3.13.0
+        uses: actions/setup-java@v4.0.0
+        with:
+          distribution: 'zulu'
+          java-version: 17
 
       - name: Get classes list
         run: |
@@ -28,6 +31,11 @@ jobs:
         run: |
           mkdir ./out/
           javac ./out/ @sources 
+
+      - name: Test Javadoc
+        run: | 
+          javadoc -sourcepath ./src/ -d ./docs -subpackages Exceptions Game Manager UI;
+          rm -r ./docs/
             
     
   
