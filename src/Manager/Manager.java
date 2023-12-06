@@ -89,19 +89,25 @@ public class Manager{
         return building;
     }
     public void setBuilding(Position pos,Building b){
-        building.put(pos,b);
-        resources.put(Resource.GOLD, resources.get(Resource.GOLD)-b.getResourcesNeeded().get(Resource.GOLD));
-        resources.put(Resource.WOOD, resources.get(Resource.WOOD)-b.getResourcesNeeded().get(Resource.WOOD));
-        resources.put(Resource.STONE, resources.get(Resource.STONE)-b.getResourcesNeeded().get(Resource.STONE));
-        addRound();
-
-        /* Pas Obligatoire pour la  version de base
-        resources.put(Resource.IRON, resources.get(Resource.IRON)-b.getResourcesNeeded().get(Resource.IRON));
-        resources.put(Resource.COAL, resources.get(Resource.COAL)-b.getResourcesNeeded().get(Resource.COAL));
-        resources.put(Resource.CEMENT, resources.get(Resource.CEMENT)-b.getResourcesNeeded().get(Resource.CEMENT));
-        resources.put(Resource.LUMBER, resources.get(Resource.LUMBER)-b.getResourcesNeeded().get(Resource.LUMBER));
-        resources.put(Resource.TOOLS, resources.get(Resource.TOOLS)-b.getResourcesNeeded().get(Resource.TOOLS));
-        */
+        int cpt = 0;
+        int length = b.getResourcesNeeded().size();
+        for (Resource r : b.getResourcesNeeded().keySet()){
+            if (resources.get(r) >= b.getResourcesNeeded().get(r)){
+                cpt ++;
+            }
+            else{
+                System.out.println("Not enought "+ r + " to build " + b.getName());
+            }
+        }
+        if (cpt == length){
+            building.put(pos,b);
+            for (Resource r : b.getResourcesNeeded().keySet()){
+                resources.put(r,resources.get(r) - b.getResourcesNeeded().get(r));
+            }
+            addRound();
+        }
+       
+     
     }
     public void removeBuilding(Position pos){
         building.remove(pos);
@@ -120,12 +126,6 @@ public class Manager{
     }
     public void addRound(){
         round++;
-    }
-    public void addObserver(Observer o){ // I guess ca va etre utile 
-        observers.add(o);
-    }
-    public void removeObserver(Observer o){// I guess la meme
-        observers.remove(o);
     }
 
     public void notifyObserver(){
