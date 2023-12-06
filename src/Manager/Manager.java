@@ -70,6 +70,8 @@ public class Manager{
         resources.put(r, resources.get(r)+i);
     }
     public void citizenDeath(Citizen c){
+        c.getHome().removeCitizen(c);
+        c.getWorkplace().removeWorker(c);
         citizens.remove(c);
     }
     public int getNumberRessource(Resource r){
