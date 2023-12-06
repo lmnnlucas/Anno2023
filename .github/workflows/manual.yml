@@ -33,7 +33,7 @@ jobs:
         run: |
           find ./src/ -type f -name "*.java" > sources 
           mkdir ./out/
-          javac  -d./out/ @sources 
+          javac -d ./out/ @sources 
 
       - name: Test Javadoc
         run: | 
