@@ -16,14 +16,15 @@ import java.util.Scanner;
 public class UI
 {
     private Manager manager;
-    private int width = manager.getWidth();
-    private int height = manager.getHeight();
     private WorldEntity[][] world;
 
     public UI(Manager manager)
     {
         this.manager = manager;
+        int width = manager.getWidth();
+        int height = manager.getHeight();
         world = new WorldEntity[width][height];
+        //System.out.println(world.length);
     }
 
     /*
@@ -133,9 +134,9 @@ public class UI
 
     public void buildWorld()
     {
-        for(int x = 0; x < width; x++)
+        for(int x = 0; x < manager.getWidth(); x++)
         {
-            for(int y = 0; y < height; y++)
+            for(int y = 0; y < manager.getHeight(); y++)
             {
                 Position position = new Position(x, y);
                 world[x][y] = transfromBuildingToWorldEntity(manager.getBuildings().get(position));
@@ -154,12 +155,12 @@ public class UI
     public void printWorld()
     {
         buildWorld();
-        for(int y = 0; y < height; y++)
+        for(int y = 0; y < manager.getHeight(); y++)
         {
-            for(int x = 0; x < width; x++)
+            for(int x = 0; x < manager.getWidth(); x++)
             {
                 System.out.print(world[x][y].getCode());
-                if(x != width - 1)
+                if(x != manager.getWidth() - 1)
                 {
                     System.out.print("_");
                 }

@@ -16,7 +16,7 @@ public class Manager{
     private final int width;
     private final int height;
     private int round = 0;
-    private UI ui = new UI(this);
+    private UI ui;
     private ArrayList<Observer> observers = new ArrayList<>();
     private HashMap<Resource,Integer> resources = new HashMap<>(){{ //Config initial
         put(Resource.GOLD, 10);
@@ -38,6 +38,7 @@ public class Manager{
         this.height = height;
         building.put(new Position(0,0),new House());
         citizens.add(new Citizen(building.get((new Position(0,0)))));
+        ui = new UI(this);
         initializeObserver();
 
     }
@@ -47,6 +48,7 @@ public class Manager{
         this.height = 10;
         building.put(new Position(0,0),new House());
         citizens.add(new Citizen(building.get((new Position(0,0)))));
+        ui = new UI(this);
         initializeObserver();
 
     }
