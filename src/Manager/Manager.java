@@ -120,7 +120,7 @@ public class Manager{
     public int getRound(){
         return round;
     }
-
+  
     /**
      * Getter of the number of a ressource
      * @param r ressource to get
@@ -194,10 +194,10 @@ public class Manager{
                 System.out.println("Not enought "+ r + " to build " + b.getName());
             }
         }
-        if (cpt == length){
-            building.put(pos,b);
-            for (Resource r : b.getResourcesNeeded().keySet()){
-                resources.put(r,resources.get(r) - b.getResourcesNeeded().get(r));
+        if (cpt == length) {
+            building.put(pos, b);
+            for (Resource r : b.getResourcesNeeded().keySet()) {
+                resources.put(r, resources.get(r) - b.getResourcesNeeded().get(r));
             }
             addRound();
         }
@@ -268,8 +268,8 @@ public class Manager{
 
     /**
      * Add workers to a building
-     * @param c citizen to add
-     * @param b building where the citizen is added
+     * @param number number of workers added
+     * @param b building where the workers are added
      */
     public void AddWorkerToABuilding(Building b,int number){
         int cpt = 0;
