@@ -175,6 +175,6 @@ public abstract class Building {
 
     public boolean isAHome()
     {
-        return false;
+        return this.citizensCapacity > 0;
     }
 }
