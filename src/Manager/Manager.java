@@ -2,6 +2,7 @@ package Manager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -43,6 +44,7 @@ public class Manager{
     /**
      * List of resources of the player
      */
+    private HashMap<HashMap<Position,Building>,Integer> waitingTime = new HashMap<>(); // PAS BO
     private HashMap<Resource,Integer> resources = new HashMap<>(){{ //Config initial
         put(Resource.GOLD, 10);
         put(Resource.FOOD, 100);
@@ -194,7 +196,10 @@ public class Manager{
             }
         }
         if (cpt == length){
-            building.put(pos,b);
+            //building.put(pos,b);
+            waitingTime.put(new HashMap<>(){{
+                put(pos,b);
+            }},b.getBuildingTime());
             for (Resource r : b.getResourcesNeeded().keySet()){
                 resources.put(r,resources.get(r) - b.getResourcesNeeded().get(r));
             }
@@ -399,4 +404,18 @@ public class Manager{
         }
         return false;
     }
+    
+    public void updateWaitingTimeBuilding() { // AAAAAAAAAAAAAAAAAAAAAAAH LES ACCES CONCURENTIELS
+        Iterator<HashMap<Position, Building>> iterator = waitingTime.keySet().iterator();
+        while (iterator.hasNext()) {
+            HashMap<Position, Building> b = iterator.next();
+            if (waitingTime.get(b) == 0) {
+                building.put(b.keySet().iterator().next(), b.values().iterator().next());
+                iterator.remove();
+            } else {
+                waitingTime.put(b, waitingTime.get(b) - 1);
+            }
+        }
+    }
+    
 }

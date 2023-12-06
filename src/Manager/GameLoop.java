@@ -11,6 +11,8 @@ public class GameLoop {
             manager.printResource();
             manager.waitEntry();
             manager.notifyObserver();
+            manager.updateWaitingTimeBuilding();
+            manager.updateWaitingTimeBuilding();
         }
     }
 }
