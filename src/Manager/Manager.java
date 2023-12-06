@@ -118,11 +118,10 @@ public class Manager{
         ui.printResource();
     }
 
-    public void AddWorkerFromBuilding(Building b,int number){
+    public void AddWorkerToABuilding(Building b,int number){
         int cpt = 0;
         for (int i = 0; i< citizens.size();i++){
             if (citizens.get(i).getWorkplace() == null){
-                citizens.get(i).setWorkplace(b);
                 b.addWorker(citizens.get(i));
                 cpt ++;
                 if (cpt == number){
@@ -140,7 +139,6 @@ public class Manager{
         int cpt = 0;
         for (int i = 0; i< citizens.size();i++){
             if (citizens.get(i).getWorkplace() == b){
-                citizens.get(i).setWorkplace(null);
                 b.removeWorker(citizens.get(i));
                 cpt ++;
                 if (cpt == number){
@@ -154,11 +152,10 @@ public class Manager{
         addRound();
     }
 
-    public void addCitizenFromBuilding(Building b,int number){
+    public void addCitizenToABuilding(Building b,int number){
         int cpt = 0;
         for (int i = 0; i< citizens.size();i++){
             if (citizens.get(i).getHome() == null){
-                citizens.get(i).setHome(b);
                 b.addCitizen(citizens.get(i));
                 cpt++;
                 if (cpt == number){
@@ -176,7 +173,6 @@ public class Manager{
         int cpt = 0;
         for (int i = 0; i< citizens.size();i++){
             if (citizens.get(i).getHome() == b){
-                citizens.get(i).setHome(null);
                 b.removeCitizen(citizens.get(i));
                 cpt++;
                 if (cpt == number){
