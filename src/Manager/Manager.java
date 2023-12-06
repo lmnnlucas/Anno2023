@@ -119,7 +119,7 @@ public class Manager{
     public int getRound(){
         return round;
     }
-
+  
     /**
      * Getter of the number of a ressource
      * @param r ressource to get
@@ -199,7 +199,6 @@ public class Manager{
                 resources.put(r,resources.get(r) - b.getResourcesNeeded().get(r));
             }
             addRound();
-        }
     }
 
     /**
