@@ -85,16 +85,25 @@ public class Manager{
         return building;
     }
     public void setBuilding(Position pos,Building b){
-        building.put(pos,b);
+        int cpt = 0;
+        int length = b.getResourcesNeeded().size();
         for (Resource r : b.getResourcesNeeded().keySet()){
             if (resources.get(r) >= b.getResourcesNeeded().get(r)){
-                resources.put(r,resources.get(r) - b.getResourcesNeeded().get(r));
+                cpt ++;
             }
             else{
-                System.out.println("Not enought "+ r + " to build this building");
+                System.out.println("Not enought "+ r + " to build " + b.getName());
             }
         }
-        addRound();
+        if (cpt == length){
+            building.put(pos,b);
+            for (Resource r : b.getResourcesNeeded().keySet()){
+                resources.put(r,resources.get(r) - b.getResourcesNeeded().get(r));
+            }
+            addRound();
+        }
+        
+        
     }
     public void removeBuilding(Position pos){
         building.remove(pos);
