@@ -25,7 +25,7 @@ jobs:
 
       - name: Get classes list
         run: |
-          find src/ -type f -name "*.java" > sources 
+          find ./src/ -type f -name "*.java" > sources 
 
       - name: Compile
         run: |
