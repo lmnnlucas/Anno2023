@@ -6,15 +6,25 @@ import Game.Position;
 
 import java.util.HashMap;
 
+/**
+ * Observer that is notified each round to add a citizen to a home if there is one available
+ */
 public class CitizenBirthObserver implements Observer
 {
     private Manager manager;
 
+    /**
+     * Constructor for CitizenBirthObserver
+     * @param manager Manager of the game
+     */
     public CitizenBirthObserver(Manager manager)
     {
         this.manager = manager;
     }
 
+    /**
+     * Checks if there is a home available and if there is, it adds a citizen to it
+     */
     @Override
     public void update()
     {
