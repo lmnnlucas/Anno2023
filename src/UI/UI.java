@@ -26,10 +26,10 @@ public class UI
     }
 
     /*
-        * This method is used to transform a building to a WorldEntity
-        * @param building the building to transform
-        * @return the WorldEntity corresponding to the building
-     */
+    * This method is used to transform a building to a WorldEntity
+    * @param building the building to transform
+    * @return the WorldEntity corresponding to the building
+    */
     private static WorldEntity transfromBuildingToWorldEntity(Building building)
     {
         if(building == null)
