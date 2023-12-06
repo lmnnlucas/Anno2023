@@ -16,4 +16,10 @@ public class House extends Building {
         this.setResourcesGenerating(null);
         this.setResourcesConsumption(null);
     }
+
+    @Override
+    public boolean isAHome()
+    {
+        return true;
+    }
 }

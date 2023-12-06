@@ -173,4 +173,8 @@ public abstract class Building {
         return this.workersCount;
     }
 
+    public boolean isAHome()
+    {
+        return false;
+    }
 }
