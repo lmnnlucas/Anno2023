@@ -17,7 +17,7 @@ public class Manager{
     private final int width;
     private final int height;
     private int round = 0;
-    private UI ui = new UI(this);
+    private UI ui;
     private ArrayList<Observer> observers = new ArrayList<>();
     private HashMap<Resource,Integer> resources = new HashMap<>(){{ //Config initial
         put(Resource.GOLD, 10);
@@ -39,6 +39,7 @@ public class Manager{
         this.height = height;
         building.put(new Position(0,0),new House());
         citizens.add(new Citizen(building.get((new Position(0,0)))));
+        ui = new UI(this);
         initializeObserver();
 
     }
@@ -48,6 +49,7 @@ public class Manager{
         this.height = 10;
         building.put(new Position(0,0),new House());
         citizens.add(new Citizen(building.get((new Position(0,0)))));
+        ui = new UI(this);
         initializeObserver();
 
     }
@@ -71,6 +73,8 @@ public class Manager{
         resources.put(r, resources.get(r)+i);
     }
     public void citizenDeath(Citizen c){
+        c.getHome().removeCitizen(c);
+        c.getWorkplace().removeWorker(c);
         citizens.remove(c);
     }
     public int getNumberRessource(Resource r){
@@ -86,21 +90,43 @@ public class Manager{
         return building;
     }
     public void setBuilding(Position pos,Building b){
-        building.put(pos,b);
-        addRound();
+        int cpt = 0;
+        int length = b.getResourcesNeeded().size();
+        for (Resource r : b.getResourcesNeeded().keySet()){
+            if (resources.get(r) >= b.getResourcesNeeded().get(r)){
+                cpt ++;
+            }
+            else{
+                System.out.println("Not enought "+ r + " to build " + b.getName());
+            }
+        }
+        if (cpt == length){
+            building.put(pos,b);
+            for (Resource r : b.getResourcesNeeded().keySet()){
+                resources.put(r,resources.get(r) - b.getResourcesNeeded().get(r));
+            }
+            addRound();
+        }
+       
+     
     }
     public void removeBuilding(Position pos){
         building.remove(pos);
+        resources.put(Resource.GOLD,resources.get(Resource.GOLD) + building.get(pos).getResourcesNeeded().get(Resource.GOLD)/2);
+        resources.put(Resource.WOOD,resources.get(Resource.WOOD) + building.get(pos).getResourcesNeeded().get(Resource.WOOD)/2);
+        resources.put(Resource.STONE,resources.get(Resource.STONE) + building.get(pos).getResourcesNeeded().get(Resource.STONE)/2);
         addRound();
+        
+        /* Pas Obligatoire pour la  version de base
+        resources.put(Resource.IRON,resources.get(Resource.IRON) + building.get(pos).getResourcesNeeded().get(Resource.IRON)/2);
+        resources.put(Resource.COAL,resources.get(Resource.COAL) + building.get(pos).getResourcesNeeded().get(Resource.COAL)/2);
+        resources.put(Resource.CEMENT,resources.get(Resource.CEMENT) + building.get(pos).getResourcesNeeded().get(Resource.CEMENT)/2);
+        resources.put(Resource.LUMBER,resources.get(Resource.LUMBER) + building.get(pos).getResourcesNeeded().get(Resource.LUMBER)/2);
+        resources.put(Resource.TOOLS,resources.get(Resource.TOOLS) + building.get(pos).getResourcesNeeded().get(Resource.TOOLS)/2);
+         */
     }
     public void addRound(){
         round++;
-    }
-    public void addObserver(Observer o){ // I guess ca va etre utile 
-        observers.add(o);
-    }
-    public void removeObserver(Observer o){// I guess la meme
-        observers.remove(o);
     }
 
     public void notifyObserver(){

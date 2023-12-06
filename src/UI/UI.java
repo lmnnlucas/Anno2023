@@ -8,22 +8,28 @@ import Manager.Manager;
 
 import java.util.Scanner;
 
+/**
+ * This class is only used to display the game in the console
+ */
 public class UI
 {
     private Manager manager;
-    private int width = 10; //manager.getWidth();
-    private int height = 10; //manager.getHeight();
     private WorldEntity[][] world;
 
     public UI(Manager manager)
     {
         this.manager = manager;
+        int width = manager.getWidth();
+        int height = manager.getHeight();
         world = new WorldEntity[width][height];
+        //System.out.println(world.length);
     }
 
-
-    //public void UI(){}
-
+    /*
+        * This method is used to transform a building to a WorldEntity
+        * @param building the building to transform
+        * @return the WorldEntity corresponding to the building
+     */
     private static WorldEntity transfromBuildingToWorldEntity(Building building)
     {
         if(building == null)
@@ -54,8 +60,16 @@ public class UI
         return null;
     }
 
-    private static Building transfromWorldEntityToBuilding(WorldEntity worldEntity) {
-        switch (worldEntity) {
+
+    /*
+        * This method is used to transform a WorldEntity to a building
+        * @param worldEntity the WorldEntity to transform
+        * @return the building corresponding to the WorldEntity
+     */
+    private static Building transfromWorldEntityToBuilding(WorldEntity worldEntity)
+    {
+        switch(worldEntity)
+        {
             case WOODEN_CABIN:
                 return new WoodenCabin();
             case HOUSE:
@@ -79,6 +93,12 @@ public class UI
         }
     }
 
+    /*
+        * This method is used to transform a char to a WorldEntity
+        * @param c the char to transform
+        * @return the WorldEntity corresponding to the char
+        * Used with associated method transformWorldEntityToBuilding
+     */
     private static WorldEntity transformCharToEntity(char c)
     {
         switch(c)
@@ -106,23 +126,42 @@ public class UI
         }
     }
 
-    public void buildWorld() {
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
+    /*
+        * This method is used to fill the WorldEntity tab
+        * The WorldEntity tab is used to display the game in the console
+     */
+
+    public void buildWorld()
+    {
+        for(int x = 0; x < manager.getWidth(); x++)
+        {
+            for(int y = 0; y < manager.getHeight(); y++)
+            {
                 Position position = new Position(x, y);
                 world[x][y] = transfromBuildingToWorldEntity(manager.getBuildings().get(position));
             }
         }
     }
 
-
+    /*
+        * This method is used to display the game in the console
+        * A game is in the form :
+        * H_x_x
+        * x_W_x
+        * x_x_x
+        * A game 3x3 with a house at the position 0 0 and a wooden cabin at the position 1 1
+     */
     public void printWorld()
     {
         buildWorld();
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+
+        for(int y = 0; y < manager.getHeight(); y++)
+        {
+            for(int x = 0; x < manager.getWidth(); x++)
+            {
                 System.out.print(world[x][y].getCode());
-                if (x != width - 1) {
+                if(x != manager.getWidth() - 1)
+                {
                     System.out.print("_");
                 }
             }
@@ -130,20 +169,29 @@ public class UI
         }
     }
 
-    public void printResource() {
+
+    /*
+        * This method is used to display the resources in the console
+     */
+    public void printResource()
+    {
         System.out.println("Round : " + manager.getRound());
         System.out.println(" -- RESOURCES -- ");
-        System.out.print("Wood : " + manager.getNumberRessource(Resource.WOOD));
-        System.out.print(" Stone : " + manager.getNumberRessource(Resource.STONE));
-        System.out.print(" Coal : " + manager.getNumberRessource(Resource.COAL));
-        System.out.print(" Iron : " + manager.getNumberRessource(Resource.IRON));
-        System.out.print(" Steel : " + manager.getNumberRessource(Resource.STEEL));
-        System.out.print(" Cement : " + manager.getNumberRessource(Resource.CEMENT));
-        System.out.print(" Lumber : " + manager.getNumberRessource(Resource.LUMBER));
-        System.out.print(" Tools : " + manager.getNumberRessource(Resource.TOOLS));
+        System.out.print("Food : " + manager.getNumberRessource(Resource.FOOD));
+        System.out.print(" | Wood : " + manager.getNumberRessource(Resource.WOOD));
+        System.out.print(" | Stone : " + manager.getNumberRessource(Resource.STONE));
+        System.out.print(" | Coal : " + manager.getNumberRessource(Resource.COAL));
+        System.out.print(" | Iron : " + manager.getNumberRessource(Resource.IRON));
+        System.out.print(" | Steel : " + manager.getNumberRessource(Resource.STEEL));
+        System.out.print(" | Cement : " + manager.getNumberRessource(Resource.CEMENT));
+        System.out.print(" | Lumber : " + manager.getNumberRessource(Resource.LUMBER));
+        System.out.print(" | Tools : " + manager.getNumberRessource(Resource.TOOLS));
     }
 
 
+    /*
+        This method is used to get the entry of the user
+     */
     public void waitEntry(){
         while(true) {
             try {
