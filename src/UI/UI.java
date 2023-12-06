@@ -162,7 +162,7 @@ public class UI
                 System.out.print(world[x][y].getCode());
                 if(x != manager.getWidth() - 1)
                 {
-                    System.out.print("_");
+                    System.out.print(" ");
                 }
             }
             System.out.println();
