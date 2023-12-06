@@ -35,6 +35,10 @@ public class CitizenBirthObserver implements Observer
             for(int x = 0 ; x < manager.getHeight() ; x++)
             {
                 Position position = new Position(x ,y);
+                if(!buildingToCheck.containsKey(position))
+                {
+                    continue;
+                }
                 if(buildingToCheck.get(position).isAHome())
                 {
                     if(buildingToCheck.get(position).getNumberofCitizens() == buildingToCheck.get(position).getCitizensCapacity()) // It's already full
