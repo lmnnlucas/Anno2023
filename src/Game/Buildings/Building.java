@@ -268,4 +268,45 @@ public abstract class Building {
     {
         return this.citizensCapacity > 0;
     }
+
+    /*
+     * Delete a worker from the building
+     * @exception BuildingException if there is no worker to remove
+     * */
+    public void removeOneWorker() {
+        if (this.workersCount > 0){
+            this.workers.remove(0);
+            this.workersCount--;
+            return;
+        }
+    	throw new BuildingException("No worker to remove");
+    }
+
+    /*
+     * Delete a worker from the building
+     * @exception BuildingException if there is no worker to remove
+     * */
+    public void removeOneCitizen() {
+        if (this.citizensCount > 0){
+            this.citizens.remove(0);
+            this.citizensCount--;
+            return;
+        }
+        throw new BuildingException("No citizen to remove");
+    }
+
+    /*
+     * Returns the ArrayList of citizens living in the building
+     * */
+    public ArrayList<Citizen> getCitizens() {
+        return citizens;
+    }
+
+    /*
+     * Returns the ArrayList of workers working in the building
+     * */
+    public ArrayList<Citizen> getWorkers() {
+        return workers;
+    }
+
 }
