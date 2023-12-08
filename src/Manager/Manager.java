@@ -302,14 +302,12 @@ public class Manager{
     public void removeWorkerFromBuilding(Building b,int number){
         int cpt = 0;
         try {
-            for (int i = 0; i < citizens.size(); i++) {
-                if (citizens.get(i).getWorkplace() == b) {
-                    b.removeWorker(citizens.get(i));
-                    cpt++;
-                    if (cpt == number) {
-                        break;
-                    }
-                }
+            if (b.getWorkers().isEmpty()) {
+                throw new BuildingException("No workers in this building");
+            }
+            for (int i=0; i < number; i++){
+                b.removeOneWorker();
+                cpt++;
             }
         }
         catch (BuildingException e){
@@ -349,14 +347,12 @@ public class Manager{
     public void removeCitizenFromBuilding(Building b,int number){
         int cpt = 0;
         try {
-            for (int i = 0; i < citizens.size(); i++) {
-                if (citizens.get(i).getHome() == b) {
-                    b.removeCitizen(citizens.get(i));
-                    cpt++;
-                    if (cpt == number) {
-                        break;
-                    }
-                }
+            if (b.getCitizens().isEmpty()){
+                throw new BuildingException("No citizen in this building");
+            }
+            for (int i = 0; i < number; i++){
+                b.removeOneCitizen();
+                cpt++;
             }
         }
         catch (BuildingException e){
