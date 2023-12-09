@@ -24,7 +24,6 @@ public class GameLoop {
             manager.waitEntry();
             manager.notifyObserver();
             manager.updateWaitingTimeBuilding();
-            manager.updateWaitingTimeBuilding();
         }
     }
 }
