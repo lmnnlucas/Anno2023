@@ -252,6 +252,9 @@ public class UI
                             break;
                         } else if (c == 'I') {
                             Building building = manager.getBuildings().get(position);
+                            if (building == null) {
+                                throw new WrongEntryException("No building at this position");
+                            }
                             System.out.println("Building : " + building.getName());
                             System.out.println("Citizens : " + building.getNumberofCitizens());
                             System.out.println("Workers : " + building.getNumberofWorkers());

@@ -5,9 +5,8 @@ import Game.Resource;
 import java.util.HashMap;
 
 public class SteelMill extends Building{
-    private final String name = "Steel Mill";
     public SteelMill() {
-        super("Wooden Cabin", 40, 0, 2, 6);
+        super("Steel Mill", 40, 0, 2, 6);
         this.setResourcesConsumption(new HashMap<>()
          {{
              put(Resource.COAL, 2);

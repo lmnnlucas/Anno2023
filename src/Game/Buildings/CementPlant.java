@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 public class CementPlant extends Building
 {
-    private final String name = "Cement Plant";
     public CementPlant() {
         super("Cement Plant", 10, 0, 4, 4);
         this.setResourcesConsumption(new HashMap<>()

@@ -8,8 +8,8 @@ public class Farm extends Building {
 
     public Farm() {
         super("Farm", 3, 5, 2, 4);
-        System.out.println("Build Farm");
-        this.setResourcesConsumption(null); // TODO : Remplacer par des 0.
+
+        this.setResourcesConsumption(null);
         this.setResourcesNeeded(new HashMap<>(){{
             put(Resource.WOOD, 5);
             put(Resource.STONE,5);

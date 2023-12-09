@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 public class WoodenCabin extends Building{
 
-    private final String name = "Wooden Cabin";
     public WoodenCabin() {
         super("Wooden Cabin", 2, 2, 2, 1);
         this.setResourcesConsumption(null);
