@@ -26,9 +26,8 @@ public class CitizenConsumingObserver implements Observer {
     @Override
     public void update() {
         manager.getCitizens().forEach(citizen -> {
-            System.out.println("Citizen " + citizen.getId() + " is consuming food");
             if (manager.getNumberRessource(Resource.FOOD) == 0) {
-                System.out.println("Citizen " + citizen.getId() + " is starving");
+                System.out.println("Citizen " + citizen.getId() + " is starving and died.");
                 manager.citizenDeath(citizen);
             } else {
                 manager.setResource(Resource.FOOD, -1);

@@ -300,82 +300,9 @@ public class Manager{
     }
 
     /**
-     * Add citizen to a building 
-     * @param b building where the citizen is add
-     * @param number number of citizen added
-     */
-    public void addCitizenToABuilding(Building b,int number){
-        int cpt = 0;
-        try {
-            for (int i = 0; i < citizens.size(); i++) {
-                if (citizens.get(i).getHome() == null) {
-                    b.addCitizen(citizens.get(i));
-                    cpt++;
-                    if (cpt == number) {
-                        break;
-                    }
-                }
-            }
-        }
-        catch (BuildingException e){
-            System.err.println("Only " + cpt + " citizen added to " + b.getName());
-        }
-        addRound();
-    }
-
-    /**
-     * Remove citizen to a building 
-     * @param b building where the citizen is removed
-     * @param number number of citizen removed
-     */
-    public void removeCitizenFromBuilding(Building b,int number){
-        int cpt = 0;
-        try {
-            if (b.getCitizens().isEmpty()){
-                throw new BuildingException("No citizen in this building");
-            }
-            for (int i = 0; i < number; i++){
-                b.removeOneCitizen();
-                cpt++;
-            }
-        }
-        catch (BuildingException e){
-            System.err.println("Only " + cpt + " workers removed from " + b.getName());
-        }
-        addRound();
-    }
-    /**
-     * Get the number of citizen without home
-     * @return number of homeless
-     */
-    public int getNumberHomeless(){
-        int cpt = 0;
-        for (int i = 0; i < citizens.size();i++){
-            if (citizens.get(i).getHome() == null){
-                cpt ++;
-            }
-        }
-        return cpt;
-    }
-    /**
-     * Get the number of workers without work
-     * @return number of workless 
-     */
-    public int getNumberWorkless(){
-        int cpt = 0;
-        for (int i =0; i < citizens.size();i++){
-            if (citizens.get(i).getWorkplace() == null){
-                cpt ++;
-            }
-        }
-        return cpt;
-    }
-
-    /**
      * Check if the game is finished
      * @return true if the game is finished
      */
-
     public boolean isFinished(){
         if (citizens.size() == 0){
             return true;
@@ -385,7 +312,10 @@ public class Manager{
         }
         return false;
     }
-    
+
+    /**
+     * Update the time remaning for buildings before they're done.
+     */
     public void updateWaitingTimeBuilding() {
         Iterator<HashMap<Position, Building>> iterator = waitingTime.keySet().iterator();
         while (iterator.hasNext()) {
