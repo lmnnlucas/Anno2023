@@ -262,7 +262,7 @@ public class UI
                             System.out.println("Consumption : " + building.getResourcesConsumption());
                             break;
                         } else if (c == 'R') {
-                            manager.getBuildings().remove(position);
+                            manager.removeBuilding(position);
                             System.out.println("Building removed");
                             break;
                         } else {
@@ -273,7 +273,7 @@ public class UI
                     }
                 }
             } catch (Exception e){
-                System.err.println(e.getMessage());
+                System.err.println(e);
             }
         }
     }

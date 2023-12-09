@@ -176,6 +176,8 @@ public class Manager{
      public void citizenDeath(Citizen c){
         c.getHome().removeCitizen(c);
         c.getWorkplace().removeWorker(c);
+        c.setHome(null);
+        c.setWorkplace(null);
         citizens.remove(c);
     }
 
@@ -209,10 +211,20 @@ public class Manager{
      */
 
     public void removeBuilding(Position pos){
+        Building b = building.get(pos);
+        System.out.println(b.getName());
+        if (b == null){
+            throw new BuildingException("No building at this position");
+        }
+        if (b.getResourcesNeeded() != null){
+            for (Resource r : b.getResourcesNeeded().keySet()){
+                resources.put(r,resources.get(r) + b.getResourcesNeeded().get(r)/2);
+            }
+        }
+        for (Citizen c : b.getCitizens()){
+            citizenDeath(c);
+        }
         building.remove(pos);
-        resources.put(Resource.GOLD,resources.get(Resource.GOLD) + building.get(pos).getResourcesNeeded().get(Resource.GOLD)/2);
-        resources.put(Resource.WOOD,resources.get(Resource.WOOD) + building.get(pos).getResourcesNeeded().get(Resource.WOOD)/2);
-        resources.put(Resource.STONE,resources.get(Resource.STONE) + building.get(pos).getResourcesNeeded().get(Resource.STONE)/2);
         addRound();
     }
 

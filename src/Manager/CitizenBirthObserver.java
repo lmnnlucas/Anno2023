@@ -27,34 +27,34 @@ public class CitizenBirthObserver implements Observer
      * Checks if there is a home available and if there is, it adds a citizen to it
      */
     @Override
-    public void update()
-    {
-        HashMap<Position, Building> buildingToCheck = manager.getBuildings();
-        for(int y = 0 ; y < manager.getWidth() ; y++)
-        {
-            for(int x = 0 ; x < manager.getHeight() ; x++)
-            {
-                Position position = new Position(x ,y);
-                if(!buildingToCheck.containsKey(position))
-                {
-                    continue;
-                }
-                if(buildingToCheck.get(position).isAHome())
-                {
-                    if(buildingToCheck.get(position).getNumberofCitizens() == buildingToCheck.get(position).getCitizensCapacity()) // It's already full
-                    {
+    public void update() {
+        if (manager.getCitizens().isEmpty()){
+            throw new CitizenException("No citizen in the game");
+        }
+        try {
+            HashMap<Position, Building> buildingToCheck = manager.getBuildings();
+            for (int y = 0; y < manager.getWidth(); y++) {
+                for (int x = 0; x < manager.getHeight(); x++) {
+                    Position position = new Position(x, y);
+                    if (!buildingToCheck.containsKey(position)) {
                         continue;
                     }
-                    else
-                    {
-                        Citizen c = new Citizen(buildingToCheck.get(position));
-                        buildingToCheck.get(position).addCitizen(c);
-                        manager.getCitizens().add(c);
-                        return;
+                    if (buildingToCheck.get(position).isAHome()) {
+                        if (buildingToCheck.get(position).getNumberofCitizens() == buildingToCheck.get(position).getCitizensCapacity()) // It's already full
+                        {
+                            continue;
+                        } else {
+                            Citizen c = new Citizen(buildingToCheck.get(position));
+                            buildingToCheck.get(position).addCitizen(c);
+                            manager.getCitizens().add(c);
+                            return;
+                        }
                     }
                 }
             }
+            throw new CitizenException("No home with free space , you need to build a new one to get more Citizen");
+        } catch (CitizenException e) {
+            System.out.println(e.getMessage());
         }
-        throw new CitizenException("No home available , you need to build a new one");
     }
 }
