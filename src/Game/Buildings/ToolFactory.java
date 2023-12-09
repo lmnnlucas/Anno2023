@@ -6,7 +6,7 @@ import Game.Resource;
 
 public class ToolFactory extends Building {
     public ToolFactory(){
-        super("Tool Factory", 12, 0, 8, 1, 8);
+        super("Tool Factory", 12, 0, 8, 8);
         this.setResourcesNeeded(new HashMap<>() {{
             put(Resource.WOOD, 100);
             put(Resource.STONE, 50);

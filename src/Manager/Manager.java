@@ -186,26 +186,21 @@ public class Manager{
      */
 
     public void setBuilding(Position pos,Building b){
-        int cpt = 0;
-        int length = b.getResourcesNeeded().size();
         for (Resource r : b.getResourcesNeeded().keySet()){
-            if (resources.get(r) >= b.getResourcesNeeded().get(r)){
-                cpt ++;
-            }
-            else{
-                System.out.println("Not enought "+ r + " to build " + b.getName());
+            if (resources.get(r) < b.getResourcesNeeded().get(r)){
+                throw new BuildingException("Not enough " + r + " to build " + b.getName());
             }
         }
-        if (cpt == length){
-            //building.put(pos,b);
-            waitingTime.put(new HashMap<>(){{
-                put(pos,b);
-            }},b.getBuildingTime());
-            for (Resource r : b.getResourcesNeeded().keySet()){
-                resources.put(r,resources.get(r) - b.getResourcesNeeded().get(r));
-            }
-            addRound();
+        if (b.getGoldCost() > resources.get(Resource.GOLD)){
+            throw new BuildingException("Not enough gold to build " + b.getName());
         }
+        waitingTime.put(new HashMap<>(){{
+            put(pos,b);
+        }},b.getBuildingTime());
+        for (Resource r : b.getResourcesNeeded().keySet()){
+            resources.put(r,resources.get(r) - b.getResourcesNeeded().get(r));
+        }
+        addRound();
     }
 
     /**
@@ -219,20 +214,11 @@ public class Manager{
         resources.put(Resource.WOOD,resources.get(Resource.WOOD) + building.get(pos).getResourcesNeeded().get(Resource.WOOD)/2);
         resources.put(Resource.STONE,resources.get(Resource.STONE) + building.get(pos).getResourcesNeeded().get(Resource.STONE)/2);
         addRound();
-        
-        /* Pas Obligatoire pour la  version de base
-        resources.put(Resource.IRON,resources.get(Resource.IRON) + building.get(pos).getResourcesNeeded().get(Resource.IRON)/2);
-        resources.put(Resource.COAL,resources.get(Resource.COAL) + building.get(pos).getResourcesNeeded().get(Resource.COAL)/2);
-        resources.put(Resource.CEMENT,resources.get(Resource.CEMENT) + building.get(pos).getResourcesNeeded().get(Resource.CEMENT)/2);
-        resources.put(Resource.LUMBER,resources.get(Resource.LUMBER) + building.get(pos).getResourcesNeeded().get(Resource.LUMBER)/2);
-        resources.put(Resource.TOOLS,resources.get(Resource.TOOLS) + building.get(pos).getResourcesNeeded().get(Resource.TOOLS)/2);
-         */
     }
 
     /**
      * Add a round to the game
      */
-
     public void addRound(){
         round++;
     }
@@ -240,7 +226,6 @@ public class Manager{
     /** 
      * Notify all the observers 
     */
-
     public void notifyObserver(){
         for(Observer o : observers){
             o.update();
@@ -250,7 +235,6 @@ public class Manager{
     /**
      * Ask the UI to print the world
      */
-    
      public void printWorld(){
         ui.printWorld();
     }
@@ -258,7 +242,6 @@ public class Manager{
     /**
      * Ask the UI to wait the entry of the player
      */
-
     public void waitEntry(){
         ui.waitEntry();
     }
@@ -266,7 +249,6 @@ public class Manager{
     /**
      * Ask the UI to print the resources
      */
-
     public void printResource(){
         ui.printResource();
     }
@@ -294,6 +276,7 @@ public class Manager{
         }
         addRound();
     }
+
     /**
      * Remove workers to a building
      * @param b building where the citizen is removed
@@ -339,6 +322,7 @@ public class Manager{
         }
         addRound();
     }
+
     /**
      * Remove citizen to a building 
      * @param b building where the citizen is removed

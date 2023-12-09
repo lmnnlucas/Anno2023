@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class LumberMill extends Building {
     public LumberMill() {
-        super("Lumber Mill", 10, 0, 4, 1, 6);
+        super("Lumber Mill", 10, 0, 4, 6);
 
         this.setResourcesNeeded(new HashMap<>() {{
             put(Resource.WOOD, 50);

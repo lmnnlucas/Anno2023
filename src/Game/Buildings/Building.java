@@ -8,20 +8,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Building {
-    private String name;
-    private int workersCapacity;
-    private int citizensCapacity;
-    private int buildingTime;
-    private int level;
-    private int goldCost;
+    private final String name;
+    private final int workersCapacity;
+    private final int citizensCapacity;
+    private final int buildingTime;
+    private final int goldCost;
     private HashMap<Resource, Integer> resourcesNeeded;
     private HashMap<Resource, Integer> resourcesConsumption;
     private HashMap<Resource, Integer> resourcesGenerating;
 
     private int citizensCount;
     private int workersCount;
-    private ArrayList<Citizen> citizens;
-    private ArrayList<Citizen> workers;
+    private final ArrayList<Citizen> citizens;
+    private final ArrayList<Citizen> workers;
 
     /*
     * Constructor for Building abstract class
@@ -32,12 +31,11 @@ public abstract class Building {
     * @param level Level of the building
     * @param goldCost Gold cost of the building
     */
-    public Building(String name, int workersCapacity, int citizensCapacity, int buildingTime, int level, int goldCost) {
+    public Building(String name, int workersCapacity, int citizensCapacity, int buildingTime, int goldCost) {
         this.name = name;
         this.workersCapacity = workersCapacity;
         this.citizensCapacity = citizensCapacity;
         this.buildingTime = buildingTime;
-        this.level = level;
         this.goldCost = goldCost;
         this.resourcesConsumption = new HashMap<>();
         this.resourcesNeeded = new HashMap<>();
@@ -62,27 +60,12 @@ public abstract class Building {
         return workersCapacity;
     }
 
-    /*
-     * Set the maximum number of workers that can work in the building
-     * @param workersCapacity Maximum number of workers that can work in the building
-     * */
-    public void setWorkersCapacity(int workersCapacity) {
-        this.workersCapacity = workersCapacity;
-    }
 
     /*
      * Returns the maximum number of citizens that can live in the building
      * */
     public int getCitizensCapacity() {
         return citizensCapacity;
-    }
-
-    /*
-     * Set the maximum number of citizens that can live in the building
-     * @param citizensCapacity Maximum number of citizens that can live in the building
-     * */
-    public void setCitizensCapacity(int citizensCapacity) {
-        this.citizensCapacity = citizensCapacity;
     }
 
     /*
@@ -93,41 +76,10 @@ public abstract class Building {
     }
 
     /*
-     * Set the time needed to build the building (in rounds)
-     * @param buildingTime Time needed to build the building (in rounds)
-     * */
-    public void setBuildingTime(int buildingTime) {
-        this.buildingTime = buildingTime;
-    }
-
-    /*
-     * Returns the level of the building
-     * */
-    public int getLevel() {
-        return level;
-    }
-
-    /*
-     * Set the level of the building
-     * @param level Level of the building
-     * */
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    /*
      * Returns the gold cost of the building
      * */
     public int getGoldCost() {
         return goldCost;
-    }
-
-    /*
-     * Set the gold cost of the building
-     * @param goldCost Gold cost of the building
-     * */
-    public void setGoldCost(int goldCost) {
-        this.goldCost = goldCost;
     }
 
     /*

@@ -8,7 +8,7 @@ public class ApartementBuilding extends Building
 {
     private final String name = "Apartement Building";
     public ApartementBuilding() {
-        super("Apartement Building", 0, 60, 6, 1, 4);
+        super("Apartement Building", 0, 60, 6, 4);
         this.setResourcesConsumption(null);
         this.setResourcesNeeded(new HashMap<>(){{
             put(Resource.WOOD, 50);

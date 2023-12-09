@@ -6,7 +6,7 @@ import Game.Resource;
 
 public class Quarry extends Building {
     public Quarry(){
-        super("Quarry", 30, 2, 2, 1, 4);
+        super("Quarry", 30, 2, 2, 4);
         System.out.println("Build Quarry");
         this.setResourcesConsumption(null); // TODO : Remplacer par des 0.
         this.setResourcesNeeded(new HashMap<>(){{
